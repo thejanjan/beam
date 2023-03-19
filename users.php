@@ -29,7 +29,7 @@ $row_count = mysqli_num_rows($result);
 print "The Beam service is empowered by <b>$row_count brilliant members!</b><br>(And counting!!)";
 print "<br><h4>All Members</h4>";
 print "<table border='1' cellpadding = '5' cellspacing = '5'><tbody>";
-print "<th>User</th><th>Join Date</th><th>Avatar</th>";
+print "<th>User</th><th>Join Date</th><th>Avatar</th><th>Account Page</th>";
 
 $index = 0;
 while ($row = mysqli_fetch_array($result, MYSQLI_BOTH)) {
@@ -38,6 +38,7 @@ while ($row = mysqli_fetch_array($result, MYSQLI_BOTH)) {
 	print "<td>User #$index:<br>$row[username]</td>";
 	print "<td>Joined the Beam Family<br>$row[timestamp]</td>";
 	print "<td><p><iframe style='width: 100px; height: 100px; overflow: hidden;' src='$row[avatar_url]' width='100' height='100' scrolling='no'>Iframes not supported</iframe></p></td>";
+	print "<td><a title='Account' href='account.php?a=$row[username]'>Go to Account</a></td>";
 	print "</tr>";
 }
 
