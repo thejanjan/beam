@@ -47,10 +47,10 @@ if ($row_count == 0) {
 	print "<br><i>Link: $row[avatar_url]</i>";
 	print "<br><br>You can put a new link to an image to set it as your avatar below.<br>";
 
-	print '<form action="account.php?a=$username" method="POST">'
-	print '<input type="text" name="avatar">'
-	print '<input type="submit" value="Set Avatar">'
-	print '</form>'
+	print '<form action="account.php?a=$username" method="POST">';
+	print '<input type="text" name="avatar">';
+	print '<input type="submit" value="Set Avatar">';
+	print '</form>';
 	
 }
 
