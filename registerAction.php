@@ -38,7 +38,7 @@ if (strlen($username) > 20) {
 		print "You can use it at any time, without the need to register.";
 	} else {
 		// It exists, so now write the username.
-		$write_query = "INSERT INTO user VALUES ('".$username."', null);";
+		$write_query = "INSERT INTO user VALUES ('".$username."', null, CURRENT_TIMESTAMP);";
 		$write_result = mysqli_query($conn, $write_query)
 		or die(mysqli_error($conn));
 

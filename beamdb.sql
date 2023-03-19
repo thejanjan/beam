@@ -1,15 +1,15 @@
+DROP DATABASE beamdb;
 CREATE DATABASE IF NOT EXISTS beamdb;
 USE beamdb;
 
-DROP TABLE IF EXISTS user;
 CREATE TABLE user(
 	username VARCHAR(20) NOT NULL,
 	avatar_url VARCHAR(80) DEFAULT NULL,
+	timestamp DATE,
 
 	PRIMARY KEY(username)
 );
 
-DROP TABLE IF EXISTS friendstatus;
 CREATE TABLE friendstatus(
   user_a VARCHAR(20),
   user_b VARCHAR(20),
@@ -19,7 +19,6 @@ CREATE TABLE friendstatus(
   FOREIGN KEY(user_b) REFERENCES user(username)
 );
 
-DROP TABLE IF EXISTS privatemessage;
 CREATE TABLE privatemessage(
 	message_id INT AUTO_INCREMENT,
   sender VARCHAR(20),
@@ -30,7 +29,6 @@ CREATE TABLE privatemessage(
   FOREIGN KEY(receiver) REFERENCES user(username)
 );
 
-DROP TABLE IF EXISTS game;
 CREATE TABLE game(
   game_id INT AUTO_INCREMENT,
   name VARCHAR(20),
@@ -45,7 +43,6 @@ CREATE TABLE game(
   PRIMARY KEY(game_id)
 );
 
-DROP TABLE IF EXISTS review;
 CREATE TABLE review(
 	review_id INT AUTO_INCREMENT,
 	game_id INT,
@@ -58,7 +55,6 @@ CREATE TABLE review(
 	FOREIGN KEY(username) REFERENCES user(username)
 );
 
-DROP TABLE IF EXISTS reviewrating;
 CREATE TABLE reviewrating(
 	review_id INT,
 	rater_name VARCHAR(20),
@@ -68,7 +64,6 @@ CREATE TABLE reviewrating(
 	FOREIGN KEY(rater_name) REFERENCES user(username)
 );
 
-DROP TABLE IF EXISTS topic;
 CREATE TABLE topic(
 	topic_id INT AUTO_INCREMENT,
 	game_id INT,
@@ -81,7 +76,6 @@ CREATE TABLE topic(
 	FOREIGN KEY(username) REFERENCES user(username)
 );
 
-DROP TABLE IF EXISTS post;
 CREATE TABLE post(
 	topic_id INT,
 	username VARCHAR(20),
