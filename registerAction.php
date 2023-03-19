@@ -14,7 +14,7 @@ or die('Error connecting to MySQL server.');
   
 	<body bgcolor="white">
   
-  
+  <h1>REGISTERING ACCOUNT...</h1>
   <hr>
 
   <?php
@@ -27,15 +27,28 @@ if (strlen($username) > 20) {
 	print "ERROR: Please specify a valid username!!";
 } else {
 	$username = mysqli_real_escape_string($conn, $username);
-	$query = "INSERT INTO user VALUES ('".$username."', null);";
 
-	$result = mysqli_query($conn, $query)
+	// Test if the username exists or not.
+	$read_query = "SELECT * FROM user u WHERE u.username=".$username.";";
+	$read_result = mysqli_query($conn, $read_query)
 	or die(mysqli_error($conn));
 
-	print "The username '".$username."' has been registered. Excellent!;";
-	print "Please head back to use your brand new account.";
+	if ($row = mysqli_fetch_array($read_result, MYSQLI_BOTH)) {
+		print "The username '".$username."' is already taken.<br>";
+		print "You can use it at any time.";
+	} else {
+		// It exists, so now write the username.
+		$write_query = "INSERT INTO user VALUES ('".$username."', null);";
+		$write_result = mysqli_query($conn, $write_query)
+		or die(mysqli_error($conn));
 
-	mysqli_free_result($result);
+		print "The username '".$username."' has been registered. Excellent!<br>";
+		print "Please head back to use your brand new account.";
+
+		mysqli_free_result($write_result);
+	}
+
+	mysqli_free_result($read_result);
 }
 
 // cleanup
