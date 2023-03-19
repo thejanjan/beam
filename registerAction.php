@@ -31,8 +31,7 @@ if (strlen($username) > 20) {
 	// Test if the username exists or not.
 	print "doing query";
 	$read_query = "SELECT * FROM user u WHERE u.username=".$username.";";
-	$read_result = mysqli_query($conn, $read_query)
-	or die(mysqli_error($conn));
+	$read_result = mysqli_query($conn, $read_query);
 	print "query done, doing check";
 	$row_count = mysqli_num_rows($read_result);
 	print "rows in query: ".$row_count;
