@@ -37,7 +37,7 @@ if ($row_count == 0) {
 	print "Please <a title='Register' href='register.html'>click here</a> to register an account.";
 } else {
 	// Now we make the account Page
-	$row = mysqli_fetch_array($result, MYSQLI_BOTH)
+	$row = mysqli_fetch_array($result, MYSQLI_BOTH);
 	print "Good day, $username.<br>";
 	print "Remember that beautiful day of $row[timestamp]? The day you registered for Beam?";
 
@@ -46,6 +46,7 @@ if ($row_count == 0) {
 	print "<td><p><iframe style='width: 100px; height: 100px; overflow: hidden;' src='$row[avatar_url]' width='100' height='100' scrolling='no'>Iframes not supported</iframe></p></td>";
 	print "<br><i>Link: $row[avatar_url]</i>";
 	print "<br><br>You can put a new link to an image to set it as your avatar below.<br>";
+
 
 	print '<form action="account.php?a=$username" method="POST">';
 	print '<input type="text" name="avatar">';
