@@ -29,11 +29,15 @@ if (strlen($username) > 20) {
 	$username = mysqli_real_escape_string($conn, $username);
 
 	// Test if the username exists or not.
+	print "doing query";
 	$read_query = "SELECT * FROM user u WHERE u.username=".$username.";";
 	$read_result = mysqli_query($conn, $read_query)
 	or die(mysqli_error($conn));
+	print "query done, doing check";
+	$row_count = mysqli_num_rows($read_result);
+	print "rows in query: ".$row_count;
 
-	if (mysqli_num_rows($read_result) != 0) {
+	if ($row_count != 0) {
 		print "The username '".$username."' is already taken.<br>";
 		print "You can use it at any time.";
 	} else {
