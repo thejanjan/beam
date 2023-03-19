@@ -14,9 +14,6 @@ or die('Error connecting to MySQL server.');
   
 	<body bgcolor="white">
   
-  <h1>REGISTERING ACCOUNT...</h1>
-  <hr>
-
   <?php
   
 $username = $_POST['username'];
