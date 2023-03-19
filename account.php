@@ -37,7 +37,7 @@ if ($row_count == 0) {
 	print "Please <a title='Register' href='register.html'>click here</a> to register an account.";
 } else {
 	// Now we make the account Page
-	$row = mysqli_fetch_array($result, MYSQLI_BOTH);
+	$row = mysqli_fetch_array($read_result, MYSQLI_BOTH);
 	print "Good day, $username.<br>";
 	print "Remember that beautiful day of $row[timestamp]? The day you registered for Beam?";
 
