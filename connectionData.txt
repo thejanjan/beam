@@ -1,0 +1,9 @@
+<?php
+
+$server = "ix-dev.cs.uoregon.edu";
+$dbname ="beamdb";
+$user = "guest";
+$pass = "guest";
+$port="3680";
+
+?>
