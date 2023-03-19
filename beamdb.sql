@@ -4,8 +4,8 @@ USE beamdb;
 
 CREATE TABLE user(
 	username VARCHAR(20) NOT NULL,
-	avatar_url VARCHAR(80) DEFAULT NULL,
-	timestamp DATE,
+	avatar_url VARCHAR(200) DEFAULT NULL,
+	timestamp TIME NOT NULL,
 
 	PRIMARY KEY(username)
 );
