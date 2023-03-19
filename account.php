@@ -16,7 +16,7 @@ or die('Error connecting to MySQL server.');
   
   <?php
   
-$username = $_POST['username'];
+$username = $_POST['username'] or $_GET['a'];
 print "<h1>$username's Account</h1><hr>";
 
 $username = mysqli_real_escape_string($conn, $username);
