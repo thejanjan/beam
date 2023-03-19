@@ -33,7 +33,7 @@ if (strlen($username) > 20) {
 	$read_result = mysqli_query($conn, $read_query)
 	or die(mysqli_error($conn));
 
-	if ($row = mysqli_fetch_array($read_result, MYSQLI_BOTH)) {
+	if (mysqli_num_rows($read_result) != 0) {
 		print "The username '".$username."' is already taken.<br>";
 		print "You can use it at any time.";
 	} else {
