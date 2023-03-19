@@ -9,7 +9,7 @@ or die('Error connecting to MySQL server.');
 
 <html>
 <head>
-  <title>Registration Action</title>
+  <title>Beam Account</title>
   </head>
   
 	<body bgcolor="white">
@@ -19,6 +19,7 @@ or die('Error connecting to MySQL server.');
 $username = $_POST['username'];
 print "<h1>$username's Account</h1><hr>";
 
+/*
 $username = mysqli_real_escape_string($conn, $username);
 
 // Test if the username exists or not.
@@ -39,6 +40,7 @@ mysqli_free_result($read_result);
 
 // cleanup
 mysqli_close($conn);
+*/
 
 ?>
 
