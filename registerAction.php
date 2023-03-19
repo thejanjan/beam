@@ -22,10 +22,10 @@ or die('Error connecting to MySQL server.');
 $username = $_POST['username'];
 
 if (strlen($username) > 20) {
-	print "<h1>USERNAME TOO LONG.</h1><hr>"
+	print "<h1>USERNAME TOO LONG.</h1><hr>";
 	print "ERROR: Username is too long. You scoundrel. Look at this foolish name: ".$username;
 } else if (strlen($username) <= 0) {
-	print "<h1>USERNAME IS INVALID</h1><hr>"
+	print "<h1>USERNAME IS INVALID</h1><hr>";
 	print "ERROR: Please specify a valid username!!";
 } else {
 	$username = mysqli_real_escape_string($conn, $username);
@@ -36,7 +36,7 @@ if (strlen($username) > 20) {
 	$row_count = mysqli_num_rows($read_result);
 
 	if ($row_count != 0) {
-		print "<h1>ACCOUNT ALREADY REGISTERED</h1><hr>"
+		print "<h1>ACCOUNT ALREADY REGISTERED</h1><hr>";
 		print "The username '".$username."' is already taken.<br>";
 		print "You can use it at any time, without the need to register.";
 	} else {
@@ -45,7 +45,7 @@ if (strlen($username) > 20) {
 		$write_result = mysqli_query($conn, $write_query)
 		or die(mysqli_error($conn));
 
-		print "<h1>A SUCCESSFUL FREAKING REGISTRATION</h1><hr>"
+		print "<h1>A SUCCESSFUL FREAKING REGISTRATION</h1><hr>";
 		print "The username '".$username."' has been registered. Excellent!<br>";
 		print "Please head back to use your brand new account.";
 
