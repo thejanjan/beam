@@ -37,7 +37,7 @@ while ($row = mysqli_fetch_array($result, MYSQLI_BOTH)) {
 	print "<tr>";
 	print "<td>User #$index:<br>$row[username]</td>";
 	print "<td>Joined the Beam Family<br>$row[timestamp]</td>";
-	print "<td><p><iframe style='width: 100px; height: 100px; overflow: hidden;' src='$row[avatar_url]' width='100' height='100' scrolling='no'>Iframes not supported</iframe></p></td>";
+	print "<td><p><img alt='Cool Avatar' width='100' height='100' src='$row[avatar_url]'></p></td>";
 	print "<td><a title='Account' href='account.php?a=$row[username]'>Go to Account</a></td>";
 	print "</tr>";
 }
