@@ -50,7 +50,7 @@ if ($row_count == 0) {
 
 	print "<br><h3>Set Profile Picture</h3>";
 	print "Your current profile picture is shown below.";
-	print "<td><p><iframe style='width: 100px; height: 100px; overflow: hidden;' src='$row[avatar_url]' width='100' height='100' scrolling='no'>Iframes not supported</iframe></p></td>";
+	print "<td><p><img alt='Cool Avatar' width='100' height='100' src='$row[avatar_url]' width='100' height='100'></p></td>";
 	print "<i>Link: $row[avatar_url]</i>";
 	print "<br><br>You can put a new link to an image to set it as your avatar below.<br>";
 
