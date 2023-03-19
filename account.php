@@ -24,10 +24,10 @@ if ($_POST['username'] != "") {
 }
 print "<h1>$username's Account</h1><hr>";
 
-$username = mysqli_real_escape_string($conn, $username);
+$clean_username = mysqli_real_escape_string($conn, $username);
 
 // Test if the username exists or not.
-$read_query = "SELECT username FROM user WHERE username='".$username."';";
+$read_query = "SELECT username, avatar_url, timestamp FROM user WHERE username='".$clean_username."';";
 $read_result = mysqli_query($conn, $read_query);
 $row_count = mysqli_num_rows($read_result);
 
@@ -37,7 +37,21 @@ if ($row_count == 0) {
 	print "Please <a title='Register' href='register.html'>click here</a> to register an account.";
 } else {
 	// Now we make the account Page
-	print "heeyyyy :)";
+	$row = mysqli_fetch_array($result, MYSQLI_BOTH)
+	print "Good day, $username.<br>";
+	print "Remember that beautiful day of $row[timestamp]? The day you registered for Beam?";
+
+	print "<br><h4>Set Profile Picture</h4>";
+	print "Your current profile picture is shown below.";
+	print "<td><p><iframe style='width: 100px; height: 100px; overflow: hidden;' src='$row[avatar_url]' width='100' height='100' scrolling='no'>Iframes not supported</iframe></p></td>";
+	print "<br><i>Link: $row[avatar_url]</i>";
+	print "<br><br>You can put a new link to an image to set it as your avatar below.<br>";
+
+	print '<form action="account.php?a=$username" method="POST">'
+	print '<input type="text" name="avatar">'
+	print '<input type="submit" value="Set Avatar">'
+	print '</form>'
+	
 }
 
 mysqli_free_result($read_result);
