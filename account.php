@@ -26,6 +26,12 @@ print "<h1>$username's Account</h1><hr>";
 
 $clean_username = mysqli_real_escape_string($conn, $username);
 
+// Perform an avatar URL post query if we have one set in POST.
+if ($_POST['avatar'] != "") {
+	$avatar_query = "UPDATE user SET avatar_url = '".$_POST['avatar']."' WHERE username='".$clean_username."';";
+	$avatar_result = mysqli_query($conn, $avatar_query);
+}
+
 // Test if the username exists or not.
 $read_query = "SELECT username, avatar_url, timestamp FROM user WHERE username='".$clean_username."';";
 $read_result = mysqli_query($conn, $read_query);
