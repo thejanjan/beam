@@ -20,13 +20,17 @@ or die('Error connecting to MySQL server.');
   
 <?php
  
-$query = "SELECT * FROM user;";
+$query = "SELECT username, avatar_url, timestamp FROM user;";
 $result = mysqli_query($conn, $query)
 or die(mysqli_error($conn));
 
+$row_count = mysqli_num_rows($query);
+
+print "The Beam service is empowered by <b>$row_count brilliant members!</b><br>(And counting!!)";
+
 while ($row = mysqli_fetch_array($result, MYSQLI_BOTH)) {
-	print "\n";
-    print "$row[username]  $row[avatar_url]";
+	print "<br>";
+    print "$row[username]  $row[avatar_url]  $row[timestamp]";
 }
 
 mysqli_free_result($result);
