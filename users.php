@@ -27,17 +27,29 @@ or die(mysqli_error($conn));
 $row_count = mysqli_num_rows($result);
 
 print "The Beam service is empowered by <b>$row_count brilliant members!</b><br>(And counting!!)";
+print "<br><h4>All Members</h4>";
+print "<table style='width: 2px;'><tbody>";
 
+$index = 0;
 while ($row = mysqli_fetch_array($result, MYSQLI_BOTH)) {
-	print "<br>";
-    print "$row[username]  $row[avatar_url]  $row[timestamp]";
+	$index = $index + 1;
+	print "<tr>";
+	print "<td>User #$index:<br>$row[username]</td>";
+	print "<td>Joined the Beam Family<br>$row[timestamp]</td>";
+	print "<td><p><iframe style='width: 100px; height: 100px; overflow: hidden;' src='$row[avatar_url]' width='100' height='100' scrolling='no'>Iframes not supported</iframe></p></td>"
+	print "</tr>";
 }
+
+print "</tbody></table>";
 
 mysqli_free_result($result);
 
 mysqli_close($conn);
 
 ?>
+
+<hr>
+<i>That is it I am all out of users Sorry</i>
 
 </body>
 </html>
