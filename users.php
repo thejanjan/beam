@@ -20,14 +20,11 @@ or die('Error connecting to MySQL server.');
   
 <?php
  
-print "prep query<br>";
 $query = "SELECT username, avatar_url, timestamp FROM user REVERSE ORDER BY timestamp;";
-print "built query<br>";
 $result = mysqli_query($conn, $query)
 or die(mysqli_error($conn));
 
-print "get row count<br>";
-$row_count = mysqli_num_rows($query);
+$row_count = mysqli_num_rows($result);
 
 print "The Beam service is empowered by <b>$row_count brilliant members!</b><br>(And counting!!)";
 
