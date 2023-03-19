@@ -18,10 +18,8 @@ or die('Error connecting to MySQL server.');
  
 $username = "";
 if ($_POST['username'] != "") {
-	print "Using post";
 	$username = $_POST['username'];
 } else {
-	print "Using get";
 	$username = htmlspecialchars($_GET['a']);
 }
 print "<h1>$username's Account</h1><hr>";
