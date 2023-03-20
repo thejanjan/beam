@@ -20,7 +20,7 @@ or die('Error connecting to MySQL server.');
   
 <?php
  
-$query = "SELECT username, avatar_url, timestamp FROM user REVERSE ORDER BY timestamp;";
+$query = "SELECT username, avatar_url, timestamp FROM user ORDER BY timestamp;";
 $result = mysqli_query($conn, $query)
 or die(mysqli_error($conn));
 
@@ -31,9 +31,9 @@ print "<br><h4>All Members</h4>";
 print "<table border='1' cellpadding = '5' cellspacing = '5'><tbody>";
 print "<th>Index</th><th>Avatar</th><th>Username</th><th>Join Date</th><th>Account Page</th>";
 
-$index = 0;
+$index = $row_count + 1;
 while ($row = mysqli_fetch_array($result, MYSQLI_BOTH)) {
-	$index = $index + 1;
+	$index = $index - 1;
 	print "<tr>";
 	print "<td>User #$index</td>";
 	print "<td><p><img alt='Cool Avatar' width='100' height='100' src='$row[avatar_url]'></p></td>";
