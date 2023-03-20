@@ -85,9 +85,15 @@ if ($_GET['b'] != "") {
 	switch ($action) {
 		case 0:
 			// Decline Incoming Friend Request 
+			$rof_query = "DELETE FROM friendstatus WHERE user_b='$clean_username' AND user_a='$_GET[b]';";
+			mysqli_query($conn, $rof_query);
+			print "<h2>Account Update</h2>Removed incoming friend request.<hr>";
 			break;
 		case 1:
 			// Approve Incoming Friend Request
+			$rof_query = "UPDATE friendstatus SET status='yes' WHERE user_b='$clean_username' AND user_a='$_GET[b]';";
+			mysqli_query($conn, $rof_query);
+			print "<h2>Account Update</h2>Added a brand new friend! Great job!<hr>";
 			break;
 		case 2:
 			// Block User 
@@ -156,7 +162,7 @@ if ($row_count == 0) {
 				print "<td>";
 				print "<a title='Account' href='account.php?a=".$username."&b=$row[user_a]&m=1'>Approve</a>";
 				print "<br><a title='Account' href='account.php?a=".$username."&b=$row[user_a]&m=0'>Decline</a>";
-				print "<br><a title='Account' href='account.php?a=".$username."&b=$row[user_a]&m=2'>Block</a>";
+				// print "<br><a title='Account' href='account.php?a=".$username."&b=$row[user_a]&m=2'>Block</a>";
 				print "<br><a title='Account' href='account.php?a=$row[user_a]'>Visit Account</a>";
 				print "</td>";
 				print "</tr>";
