@@ -81,23 +81,37 @@ if ($_POST['add_friend'] != "") {
 // Perform a block send query if we have one set in POST.
 if ($_POST['add_block'] != "") {
 	// No sending blocks to ourselves.
+	print "1";
 	if ($_POST['add_block'] == $username) {
+		print "1";
 		print "<h2>Account Update</h2>You cannot block yourself!<br><b>(DO NOT VIOLATE BEAM POLICY.)</b><hr>";
 	} else {
 		// First, ensure that user even exists.
+		print "1";
 		$user_exists_query = "SELECT username, avatar_url, timestamp FROM user WHERE username='".$_POST['add_block']."';";
+		print "1";
 		$user_exists_result = mysqli_query($conn, $user_exists_query);
+		print "1";
 		if (mysqli_num_rows($user_exists_result) == 0) {
 			// No user exists.
+			print "1";
 			print "<h2>Account Update</h2>That user does not exist!<hr>";
 		} else {
 			// Now, block them.
-			$rof_query = "DELETE FROM friendstatus WHERE (user_a='$clean_username' AND user_b='$_POST[add_block]') OR (user_b='$clean_username' AND user_a='$_POST[add_block]');";
+			print "1";
+			$block_name = $_POST['add_block'];
+			print "1";
+			$rof_query = "DELETE FROM friendstatus WHERE (user_a='$clean_username' AND user_b='$block_name') OR (user_b='$clean_username' AND user_a='$block_name');";
+			print "1";
 			mysqli_query($conn, $rof_query);
+			print "1";
 
 			$write_query = "INSERT INTO friendstatus VALUES ('".$clean_username."', '".$_POST['add_block']."', 'block');";
+			print "1";
 			$write_result = mysqli_query($conn, $write_query);
+			print "1";
 			mysqli_free_result($write_result);
+			print "1";
 
 			print "<h2>Account Update</h2>User blocked.<hr>";
 		}
@@ -348,7 +362,7 @@ if ($row_count == 0) {
 	mysqli_free_result($block_result);
 
 	// Send Block Prompt
-	print "<br><br>You can type a username here to block them.<br>";
+	print "<br>You can type a username here to block them.<br>";
 	print '<form action="account.php?a='.$username.'" method="POST">';
 	print '<input type="text" name="add_block">';
 	print '<input type="submit" value="Block User">';
