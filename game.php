@@ -95,7 +95,7 @@ if ($row_count == 0) {
 				print "<img src=$user_row[avatar_url] alt='Gaming' width='100' height='100' style='float:right'>";
 				print "<h2>Review from $username: $rating/100</h2>";
 				print "$description";
-				print "<br><br>"
+				print "<br><br>";
 				print "<i>What emotion did this review spark?</i><br>";
 				print "<form action='game.php?g=$game_id&r=$review_id' method='POST'>";
 				print "<label for='review_username'>Username: </label>";
