@@ -17,6 +17,7 @@ or die('Error connecting to MySQL server.');
   
   <?php
 
+/*
 print "1";
 $game_id = $_GET['g'];
 print "<br>$game_id";
@@ -41,7 +42,7 @@ if ($row_count == 0) {
 // cleanup
 mysqli_free_result($game_result);
 mysqli_close($conn);
-
+*/
 
 ?>
 
