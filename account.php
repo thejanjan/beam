@@ -53,7 +53,9 @@ if ($_POST['add_friend'] != "") {
 			$af_check_relation_result = mysqli_query($conn, $af_check_relation_query);
 			if (mysqli_num_rows($af_check_relation_result) != 0) {
 				// Relation exists, check relation and give relevant error message
+				print "relation exists";
 				$row = mysqli_fetch_array($af_check_relation_result, MYSQLI_BOTH);
+				print "doing checks";
 				if ($row[status] == "request") {
 					print "<h2>Account Update</h2>There is already an active friend request!<hr>";
 				} else if ($row[status] == "yes") {
