@@ -147,18 +147,14 @@ else {
 
 				$index = 0;
 				while ($row = mysqli_fetch_array($msg_result, MYSQLI_BOTH)) {
-					print "1";
 					$avatar = $row_a[1];
-					print "2";
 					if ($row[1] == $row_b[0]) {
-						print "3";
 						$avatar = $row_b[1];
 					}
-					print "4";
 					$index = $index + 1;
 					print "<tr>";
 					print "<td><p><img alt='Cool Avatar' width='100' height='100' src='$avatar'></p></td>";
-					print "<td>$other_user</td>";
+					print "<td>$row[sender]</td>";
 					print "<td>$row[message]</td>";
 					print "<td>$row[timestamp]</td>";
 					print "</tr>";
