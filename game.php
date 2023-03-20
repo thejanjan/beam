@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 include('connectionData.txt');
 
@@ -71,7 +71,7 @@ if ($row_count == 0) {
 	print "</form>";
 
 	// List all reviews
-	$review_query = "SELECT game_id, username, rating, description, timestamp FROM review WHERE game_id=$game_id ORDER BY timestamp DESC;";
+	$review_query = "SELECT review_id, game_id, username, rating, description, timestamp FROM review WHERE game_id=$game_id ORDER BY timestamp DESC;";
 	$review_result = mysqli_query($conn, $review_query)
 	or die(mysqli_error($conn));
 
@@ -81,9 +81,10 @@ if ($row_count == 0) {
 		print "<hr><h2>All Reviews ($row_count)</h2>";
 		$index = 0;
 		while ($row = mysqli_fetch_array($review_result, MYSQLI_BOTH)) {
-			$username = $row[1];
-			$rating = $row[2];
-			$description = $row[3];
+			$review_id = $row[0];
+			$username = $row[2];
+			$rating = $row[3];
+			$description = $row[4];
 
 			$user_query = "SELECT username, avatar_url, timestamp FROM user WHERE username='$username';";
 			$user_result = mysqli_query($conn, $user_query);
@@ -92,9 +93,21 @@ if ($row_count == 0) {
 				$index = $index + 1;
 				print "<hr>";
 				print "<img src=$user_row[avatar_url] alt='Gaming' width='100' height='100' style='float:right'>";
-				print "<h2>Review from $username</h2>";
-				print "<h3>A Solid $rating/100</h3>";
+				print "<h2>Review from $username: $rating/100</h2>";
 				print "$description";
+				print "<br><br>"
+				print "<i>What emotion did this review spark?</i><br>";
+				print "<form action='game.php?g=$game_id&r=$review_id' method='POST'>";
+				print "<label for='review_username'>Username: </label>";
+				print "<input type='text' id='username' name='username'><br>";
+				print "<input type='radio' id='funny' name='rating' value='funny'>";
+				print "<label for='funny'>😂 Funny</label><br>";
+				print "<input type='radio' id='true' name='rating' value='true'>";
+				print "<label for='true'>✅ True</label><br>";
+				print "<input type='radio' id='tragic' name='rating' value='tragic'>";
+				print "<label for='tragic'>💧 Tragic</label><br>";
+				print "<input type='submit' value='Submit'>";
+				print "</form>";
 			}
 			mysqli_free_result($user_result);
 		}
