@@ -17,6 +17,10 @@ or die('Error connecting to MySQL server.');
   
   <?php
 
+  ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 // Check what game we are looking at.
 $game_id = $_GET['g'];
 
@@ -47,8 +51,7 @@ if ($game_id == "") {
 } else {
 	// We are looking at a game.
 	$game_query = "SELECT game_id, name, description, image FROM game WHERE game_id='$game_id';";
-	$game_result = mysqli_query($conn, $game_query)
-	or die(mysqli_error($conn));
+	$game_result = mysqli_query($conn, $game_query);
 	$row_count = mysqli_num_rows($game_result);
 	if ($row_count == 0) {
 		die();
