@@ -141,7 +141,7 @@ else {
 				print "<th>Avatar</th><th>User</th><th>Message</th><th>Timestamp</th>";
 
 				$index = 0;
-				while ($row = mysqli_fetch_array($friend_result, MYSQLI_BOTH)) {
+				while ($row = mysqli_fetch_array($msg_result, MYSQLI_BOTH)) {
 					print "1";
 					$avatar = $user_a_query['avatar_url'];
 					print "2";
