@@ -57,21 +57,16 @@ if ($game_id == "") {
 	if ($row_count == 0) {
 		die();
 	}
-	
 	$row = mysqli_fetch_array($game_result, MYSQLI_BOTH)
-	mysqli_free_result($game_result);
-	/*
 
 	$game_name = $row[name];
 	$game_desc = $row[description];
 	$game_img = $row[image];
-	*/
 	
 	// Any specific topic?
 	$topic_id = $_GET['t'];
 
 	if ($topic_id == "") {
-		/*
 		// No specific topic. List all visible topics.
 		// Start with the header.
 		print "<h1>$game_name - Topics</h1><hr>";
@@ -110,7 +105,6 @@ if ($game_id == "") {
  
 		// cleanup
 		mysqli_free_result($topic_result);
-		*/
 		
 	} else {
 		// List all posts from this topic.
