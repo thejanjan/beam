@@ -17,7 +17,7 @@ or die('Error connecting to MySQL server.');
   
   <?php
 
-/*
+
 print "1";
 $game_id = $_GET['g'];
 print "<br>$game_id";
@@ -26,13 +26,13 @@ print "<br>query made";
 $game_result = mysqli_query($conn, $game_query);
 print "<br>result made";
 
+/*
 $row_count = mysqli_num_rows($game_result);
 
 print "<br>row count $row_count";
 
 if ($row_count == 0) {
 	print "<br>FAIL!";
-	// die();
 } else {
 	$row = mysqli_fetch_array($game_result, MYSQLI_BOTH)
 
