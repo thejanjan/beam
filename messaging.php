@@ -132,13 +132,9 @@ else {
 			print '<input type="submit" value="Send">';
 			print '</form>';
 
-			print 'query';
-			$msg_query = "SELECT message_id, sender, receiver, message, timestamp FROM privatemessage WHERE (sender == '$user_a' AND receiver == '$user_b') OR (sender == '$user_b' AND receiver == '$user_a') ORDER BY timestamp DESC;";
-			print 'result';
+			$msg_query = "SELECT message_id, sender, receiver, message, timestamp FROM privatemessage WHERE (sender = '$user_a' AND receiver = '$user_b') OR (sender = '$user_b' AND receiver = '$user_a') ORDER BY timestamp DESC;";
 			$msg_result = mysqli_query($conn, $msg_query);
-			print 'row count';
 			$row_count = mysqli_num_rows($msg_result);
-			print 'yay';
 	
 			if ($row_count != 0) {
 				print "<table border='1' cellpadding = '5' cellspacing = '5'><tbody>";
