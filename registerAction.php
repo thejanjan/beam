@@ -42,7 +42,7 @@ if (strlen($username) > 20) {
 		$write_result = mysqli_query($conn, $write_query)
 		or die(mysqli_error($conn));
 
-		print "<h1>A SUCCESSFUL FREAKING REGISTRATION</h1><hr>";
+		print "<h1>A SUCCESSFUL REGISTRATION</h1><hr>";
 		print "The username '".$username."' has been registered. Excellent!<br>";
 		print "Please head back to use your brand new account.";
 
