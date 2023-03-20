@@ -59,7 +59,7 @@ mysqli_close($conn);
 
 <br><br>
 <form>
- <input type="button" value="Back" onclick="history.back()">
+ <input type="button" value="Home" onclick="index.html">
 </form>
 
 </body>

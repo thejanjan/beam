@@ -55,7 +55,7 @@ mysqli_close($conn);
 <i>That is it I am all out of users Sorry</i>
 <br>
     <form>
-        <input type="button" value="Take Me Back" onclick="history.back()">
+        <input type="button" value="Take Me Home" onclick="index.html">
     </form>
 
 </body>

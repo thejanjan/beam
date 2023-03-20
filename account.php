@@ -226,7 +226,7 @@ mysqli_close($conn);
 <i>Providing Sensitive User Information Since 1991<br>BeamBeamPalace, Inc.</i>
 <br><br>
 <form>
- <input type="button" value="Go Back" onclick="history.back()">
+ <input type="button" value="Go Home" onclick="index.html">
 </form>
 
 </body>
