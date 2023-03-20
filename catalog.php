@@ -31,7 +31,7 @@ print "<br>Actually, I'll tell you: There are <b>$row_count games!</b>";
 
 while ($row = mysqli_fetch_array($game_result, MYSQLI_BOTH)) {
 	print "<hr>";
-	print "<img src=$row[image] alt='Gaming' width='250' height='150' style='float:left'>";
+	print "<img src=$row[image] alt='Gaming' width='150' height='150' style='float:left'>";
 	print "<h2>$row[name]</h2>$row[description]";
 	print "<h3>$"."$row[cost]</h3>";
 	print "<br>Open Game Page | See Forum Discussion<br>";
