@@ -53,9 +53,9 @@ if ($_POST['add_friend'] != "") {
 			$af_check_relation_result = mysqli_query($conn, $af_check_relation_query);
 			if (mysqli_num_rows($af_check_relation_result) != 0) {
 				// Relation exists, check relation and give relevant error message
-				print "relation exists";
+				print "<h2>Account Update</h2>You cannot send a friend request to this user!<hr>";
+				/*
 				$row = mysqli_fetch_array($af_check_relation_result, MYSQLI_BOTH);
-				print "doing checks, status: $row[status] of type ".gettype($row[status]);
 				if ($row[status] == "request") {
 					print "<h2>Account Update</h2>There is already an active friend request!<hr>";
 				} else if ($row[status] == "yes") {
@@ -63,6 +63,7 @@ if ($_POST['add_friend'] != "") {
 				} else if ($row[status] == "block") {
 					print "<h2>Account Update</h2>You guys have blocked each other!<hr>";
 				}
+				*/
 			} else {
 				// There is no relation between users.
 				// Send a friend request their way.
