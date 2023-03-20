@@ -17,11 +17,11 @@ or die('Error connecting to MySQL server.');
   
   <?php
 
-/*
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-*/
+
 
 // Check what game we are looking at.
 $game_id = $_GET['g'];
