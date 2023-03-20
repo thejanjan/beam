@@ -21,7 +21,7 @@ or die('Error connecting to MySQL server.');
   
   <?php
 
-$game_query = "SELECT name, description, cost, developer, image FROM game;";
+$game_query = "SELECT game_id, name, description, cost, developer, image FROM game;";
 $game_result = mysqli_query($conn, $game_query)
 or die(mysqli_error($conn));
 
@@ -30,11 +30,15 @@ $row_count = mysqli_num_rows($game_result);
 print "<br>Actually, I'll tell you: There are <b>$row_count games!</b>";
 
 while ($row = mysqli_fetch_array($game_result, MYSQLI_BOTH)) {
+	$gid = $row[game_id];
 	print "<hr>";
 	print "<img src=$row[image] alt='Gaming' width='150' height='150' style='float:left'>";
 	print "<h2>$row[name]</h2>$row[description]";
-	print "<h3>$"."$row[cost]</h3>";
-	print "<br>Open Game Page | See Forum Discussion<br>";
+	print "<h3>$"."$row[cost]</h3><br>";
+	print "<a title='Game' href='game.php?g=$gid'>Open Game Page</a>";
+	print " | ";
+	print "<a title='Forums' href='forums.php?g=$gid'>See Forum Discussion</a>";
+	print "<br>";
 }
  
 // cleanup
