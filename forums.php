@@ -75,6 +75,23 @@ if ($game_id == "") {
 		print "<h1>$game_name - Topics</h1><hr>";
 		print "Check out the Topics for your favorite game.";
 
+		// Check POST request for adding a topic
+		if ($_POST['username'] != "") {
+			// Get post constants.
+			$username = $_POST['username'];
+			$topic = $_POST['topic'];
+
+			// First, ensure that user even exists.
+			$user_exists_query = "SELECT username, avatar_url, timestamp FROM user WHERE username='$username';";
+			$user_exists_result = mysqli_query($conn, $user_exists_query);
+			if (mysqli_num_rows($user_exists_result) != 0) {
+				// Add the topic.
+				$write_query = "INSERT INTO topic (game_id, username, topic_name, timestamp) VALUES ('$game_id', '$username', '$topic', CURRENT_TIMESTAMP);";
+				mysqli_query($conn, $write_query);
+			}
+			mysqli_free_result($user_exists_result);
+		}
+
 		// Leave a Review entry
 		print "<h3>Create a Topic</h3>";
 		print "Create a topic for this game below!<br>";
