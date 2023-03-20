@@ -157,14 +157,10 @@ if ($row_count == 0) {
 
 		$index = 0;
 		while ($row = mysqli_fetch_array($friend_result, MYSQLI_BOTH)) {
-			print "tracking down other user";
 			$other_user = $row[0];
-			print "is it this one?";
 			if ($row[0] == $username) {
-				print "lets try this one";
 				$other_user = $row[1];
 			}
-			print "yay! its $other_user";
 
 			$user_query = "SELECT username, avatar_url, timestamp FROM user WHERE username='$other_user';";
 			$user_result = mysqli_query($conn, $user_query);
