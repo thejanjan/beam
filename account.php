@@ -40,26 +40,34 @@ if ($_POST['add_friend'] != "") {
 	if ($_POST['add_friend'] == $username) {
 		print "<h2>Account Update</h2>You cannot befriend yourself!<br><b>(DO NOT VIOLATE BEAM POLICY.)</b><hr>";
 	} else {
-		// First, ensure there is not one sent already.
-		$af_check_relation_query = "SELECT user_a, user_b, status FROM friendstatus WHERE (user_a='".$clean_username."' AND user_b='".$_POST['add_friend']."') OR (user_a='".$_POST['add_friend']."' AND user_b='".$clean_username."');";
-		$af_check_relation_result = mysqli_query($conn, $af_check_relation_query);
-		if (mysqli_num_rows($af_check_relation_result) != 0) {
-			// Relation exists, check relation and give relevant error message
-			$row = mysqli_fetch_array($af_check_relation_result, MYSQLI_BOTH);
-			if ($row[status] == "request") {
-				print "<h2>Account Update</h2>There is already an active friend request!<hr>";
-			} else if ($row[status] == "yes") {
-				print "<h2>Account Update</h2>You guys are already friends!<hr>";
-			} else if ($row[status] == "block") {
-				print "<h2>Account Update</h2>You guys have blocked each other!<hr>";
-			}
+		// First, ensure that user even exists.
+		$user_exists_query = "SELECT username, avatar_url, timestamp FROM user WHERE username='".$_POST['add_friend']."';";
+		$user_exists_result = mysqli_query($conn, $user_exists_query);
+		if (mysqli_num_rows($user_exists_result) == 0) {
+			// No user exists.
+			print "<h2>Account Update</h2>That user does not exist!<hr>";
 		} else {
-			// There is no relation between users.
-			// Send a friend request their way.
-			$write_query = "INSERT INTO friendstatus VALUES ('".$username."', '".$_POST['add_friend']."', 'request');";
-			$write_result = mysqli_query($conn, $write_query);
+			// Now, ensure there is not one sent already.
+			$af_check_relation_query = "SELECT user_a, user_b, status FROM friendstatus WHERE (user_a='".$clean_username."' AND user_b='".$_POST['add_friend']."') OR (user_a='".$_POST['add_friend']."' AND user_b='".$clean_username."');";
+			$af_check_relation_result = mysqli_query($conn, $af_check_relation_query);
+			if (mysqli_num_rows($af_check_relation_result) != 0) {
+				// Relation exists, check relation and give relevant error message
+				$row = mysqli_fetch_array($af_check_relation_result, MYSQLI_BOTH);
+				if ($row[status] == "request") {
+					print "<h2>Account Update</h2>There is already an active friend request!<hr>";
+				} else if ($row[status] == "yes") {
+					print "<h2>Account Update</h2>You guys are already friends!<hr>";
+				} else if ($row[status] == "block") {
+					print "<h2>Account Update</h2>You guys have blocked each other!<hr>";
+				}
+			} else {
+				// There is no relation between users.
+				// Send a friend request their way.
+				$write_query = "INSERT INTO friendstatus VALUES ('".$username."', '".$_POST['add_friend']."', 'request');";
+				$write_result = mysqli_query($conn, $write_query);
 
-			print "<h2>Account Update</h2>Friend request sent successfully!<hr>";
+				print "<h2>Account Update</h2>Friend request sent successfully!<hr>";
+			}
 		}
 	}
 }
