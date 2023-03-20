@@ -41,7 +41,7 @@ if ($row_count == 0) {
 		$user_exists_result = mysqli_query($conn, $user_exists_query);
 		if (mysqli_num_rows($user_exists_result) != 0) {
 			// Add the review.
-			$write_query = "INSERT INTO friendstatus (game_id, username, rating, description) VALUES ('$game_id', '$username', '$rating', '$review');";
+			$write_query = "INSERT INTO review (game_id, username, rating, description) VALUES ('$game_id', '$username', '$rating', '$review');";
 			mysqli_query($conn, $write_query);
 		}
 		mysqli_free_result($user_exists_result);
