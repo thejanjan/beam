@@ -115,7 +115,8 @@ if ($row_count == 0) {
 			$rating_query = "SELECT review_id, rating FROM reviewrating WHERE review_id='$review_id';";
 			$rating_result = mysqli_query($conn, $rating_query);
 			while ($row = mysqli_fetch_array($rating_result, MYSQLI_BOTH)) {
-				$rating = $row[rating];
+				$rating = $row[2];
+				print "$rating";
 				if (strcmp($rating, "funny") == 0) {
 					$funny = $funny + 1;
 				} else if (strcmp($rating, "true") == 0) {
