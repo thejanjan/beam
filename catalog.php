@@ -10,6 +10,7 @@ or die('Error connecting to MySQL server.');
 <html>
 <head>
   <title>Game Catalog</title>
+
   </head>
   
 	<body bgcolor="white">
@@ -19,6 +20,20 @@ or die('Error connecting to MySQL server.');
 	You won't BELIEVE how many Games exist on the Beam Hypernet!
   
   <?php
+
+$game_query = "SELECT name, description, cost, developer, image FROM game;";
+$game_result = mysqli_query($conn, $game_query)
+or die(mysqli_error($conn));
+
+$row_count = mysqli_num_rows($game_result);
+
+print "<br>Actually, I'll tell you: There are <b>$row_count games!</b>'";
+
+while ($row = mysqli_fetch_array($block_result, MYSQLI_BOTH)) {
+	print "<hr>";
+	print "<img src=$row[image] alt='Gaming' width='150' height='150' style='float:right'>";
+	print "<h3>$row[name]</h3>$row[description]";
+}
  
 // cleanup
 mysqli_close($conn);
