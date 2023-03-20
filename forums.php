@@ -40,11 +40,8 @@ if ($game_id == "") {
 		$gid = $row[0];
 		print "<hr>";
 		print "<img src=$row[image] alt='Gaming' width='100' height='100' style='float:left'>";
-		print "<h2>$row[name]</h2>$row[description]<br>";
-		print "<a title='Game' href='game.php?g=$gid'>Open Game Page</a>";
-		print " | ";
-		print "<a title='Forums' href='forums.php?g=$gid'>See Forum Discussion</a>";
-		print "<br>";
+		print "<h2><a title='Forums' href='forums.php?g=$gid'>$row[name]</a></h2>$row[description]";
+		print "<br><br><br>";
 	}
  
 	// cleanup
