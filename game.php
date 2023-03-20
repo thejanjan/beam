@@ -71,7 +71,36 @@ if ($row_count == 0) {
 	print "</form>";
 
 	// List all reviews
-	print "<hr><h2>All Reviews</h2>";
+	$game_query = "SELECT game_id, username, rating, description FROM review WHERE game_id=$game_id;";
+	$game_result = mysqli_query($conn, $game_query)
+	or die(mysqli_error($conn));
+
+	$row_count = mysqli_num_rows($game_result);
+	
+	if ($row_count != 0) {
+		print "<hr><h2>All Reviews ($row_count)</h2>";
+		$index = 0;
+		while ($row = mysqli_fetch_array($game_result, MYSQLI_BOTH)) {
+			$username = $row['username'];
+			$rating = $row['rating'];
+			$description = $row['description'];
+
+			$user_query = "SELECT username, avatar_url, timestamp FROM user WHERE username=$username;";
+			$user_result = mysqli_query($conn, $user_query);
+			if (mysqli_num_rows($user_result) != 0) {
+				$user_row = mysqli_fetch_array($user_result, MYSQLI_BOTH);
+				$index = $index + 1;
+				print "<hr>";
+				print "<h3>Review from $username</h3>";
+				print "<h2>A Solid $rating/100</h2>";
+				print "$description";
+			}
+			mysqli_free_result($user_result);
+		}
+
+	}
+
+	mysqli_free_result($friend_result);
 }
 
 // cleanup
