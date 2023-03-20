@@ -86,6 +86,24 @@ if ($row_count == 0) {
 			$rating = $row[3];
 			$description = $row[4];
 
+			// Get the types of funnies.
+			$funny = 0;
+			$true = 0;
+			$tragic = 0;
+
+			$rating_query = "SELECT username, avatar_url, timestamp FROM user WHERE username='$username';";
+			$rating_result = mysqli_query($conn, $rating_query);
+			while ($row = mysqli_fetch_array($rating_result, MYSQLI_BOTH)) {
+				if ($row[rating] == 'funny') {
+					$funny = $funny + 1
+				} else if ($row[rating] == 'true') {
+					$true = $true + 1
+				} else if ($row[rating] == 'tragic') {
+					$tragic = $tragic + 1
+				}
+			}
+
+			// Now get user query.
 			$user_query = "SELECT username, avatar_url, timestamp FROM user WHERE username='$username';";
 			$user_result = mysqli_query($conn, $user_query);
 			if (mysqli_num_rows($user_result) != 0) {
@@ -101,11 +119,11 @@ if ($row_count == 0) {
 				print "<label for='rusername'>Username: </label>";
 				print "<input type='text' id='rusername' name='rusername'><br>";
 				print "<input type='radio' id='funny' name='rating' value='funny'>";
-				print "<label for='funny'>😂 Funny</label><br>";
+				print "<label for='funny'>😂 Funny ($funny)</label><br>";
 				print "<input type='radio' id='true' name='rating' value='true'>";
-				print "<label for='true'>✅ True</label><br>";
+				print "<label for='true'>✅ True ($true)</label><br>";
 				print "<input type='radio' id='tragic' name='rating' value='tragic'>";
-				print "<label for='tragic'>💧 Tragic</label><br>";
+				print "<label for='tragic'>💧 Tragic ($tragic)</label><br>";
 				print "<input type='submit' value='Submit'>";
 				print "</form>";
 			}
