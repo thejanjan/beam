@@ -118,6 +118,9 @@ else {
 			// Account does not exist, lol.
 			print "The username '".$user_b."' does not exist.<br>";
 		} else {
+			$row_a = mysqli_fetch_array($user_a_result, MYSQLI_BOTH);
+			$row_b = mysqli_fetch_array($user_b_result, MYSQLI_BOTH);
+
 			if ($_POST['message'] != "") {
 				// Send a message to user B here.
 				$msg = $_POST['message'];
@@ -142,14 +145,10 @@ else {
 
 				$index = 0;
 				while ($row = mysqli_fetch_array($msg_result, MYSQLI_BOTH)) {
-					print "1";
-					$avatar = $user_a_result['avatar_url'];
-					print "2";
-					if ($row[sender] == $user_b_result['username']) {
-						print "3";
-						$avatar = $user_b_result['avatar_url'];
+					$avatar = $row_a['avatar_url'];
+					if ($row[sender] == $row_b['username']) {
+						$avatar = $row_b['avatar_url'];
 					}
-					print "4";
 					$index = $index + 1;
 					print "<tr>";
 					print "<td><p><img alt='Cool Avatar' width='100' height='100' src='$avatar'></p></td>";
