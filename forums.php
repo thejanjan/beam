@@ -17,7 +17,7 @@ or die('Error connecting to MySQL server.');
   
   <?php
 
-  ini_set('display_errors', 1);
+ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
@@ -106,10 +106,11 @@ if ($game_id == "") {
  
 		// cleanup
 		mysqli_free_result($topic_result);
-		*/
+		
 	} else {
 		// List all posts from this topic.
 	}
+	*/
 }
 
 // cleanup
