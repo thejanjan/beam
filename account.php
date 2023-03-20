@@ -116,17 +116,22 @@ if ($row_count == 0) {
 
 		$index = 0;
 		while ($row = mysqli_fetch_array($friend_request_result, MYSQLI_BOTH)) {
-			$index = $index + 1;
-			print "<tr>";
-			print "<td><p><img alt='Cool Avatar' width='100' height='100' src='$row[avatar_url]'></p></td>";
-			print "<td>$row[user_a]</td>";
-			print "<td>";
-			print "<a title='Account' href='account.php?a=".$username."&b=$row[user_a]&m=1'>Approve</a>";
-			print "<br><a title='Account' href='account.php?a=".$username."&b=$row[user_a]&m=0'>Decline</a>";
-			print "<br><a title='Account' href='account.php?a=".$username."&b=$row[user_a]&m=2'>Block</a>";
-			print "<br><a title='Account' href='account.php?a=$row[user_a]'>Visit Account</a>";
-			print "</td>";
-			print "</tr>";
+			$user_exists_query = "SELECT username, avatar_url, timestamp FROM user WHERE username='".$row[user_a]."';";
+			$user_exists_result = mysqli_query($conn, $user_exists_query);
+			if (mysqli_num_rows($user_exists_result) != 0) {
+				$user_row = mysqli_fetch_array($user_exists_result, MYSQLI_BOTH);
+				$index = $index + 1;
+				print "<tr>";
+				print "<td><p><img alt='Cool Avatar' width='100' height='100' src='$user_row[avatar_url]'></p></td>";
+				print "<td>$row[user_a]</td>";
+				print "<td>";
+				print "<a title='Account' href='account.php?a=".$username."&b=$row[user_a]&m=1'>Approve</a>";
+				print "<br><a title='Account' href='account.php?a=".$username."&b=$row[user_a]&m=0'>Decline</a>";
+				print "<br><a title='Account' href='account.php?a=".$username."&b=$row[user_a]&m=2'>Block</a>";
+				print "<br><a title='Account' href='account.php?a=$row[user_a]'>Visit Account</a>";
+				print "</td>";
+				print "</tr>";
+			}
 		}
 
 		print "</tbody></table>";
@@ -149,15 +154,20 @@ if ($row_count == 0) {
 
 		$index = 0;
 		while ($row = mysqli_fetch_array($friend_request_result, MYSQLI_BOTH)) {
-			$index = $index + 1;
-			print "<tr>";
-			print "<td><p><img alt='Cool Avatar' width='100' height='100' src='$row[avatar_url]'></p></td>";
-			print "<td>$row[user_b]</td>";
-			print "<td>";
-			print "<a title='Account' href='account.php?a=".$username."&b=$row[user_b]&m=3'>Remove</a>";
-			print "<br><a title='Account' href='account.php?a=$row[user_b]'>Visit Account</a>";
-			print "</td>";
-			print "</tr>";
+			$user_exists_query = "SELECT username, avatar_url, timestamp FROM user WHERE username='".$row[user_a]."';";
+			$user_exists_result = mysqli_query($conn, $user_exists_query);
+			if (mysqli_num_rows($user_exists_result) != 0) {
+				$user_row = mysqli_fetch_array($user_exists_result, MYSQLI_BOTH);
+				$index = $index + 1;
+				print "<tr>";
+				print "<td><p><img alt='Cool Avatar' width='100' height='100' src='$user_row[avatar_url]'></p></td>";
+				print "<td>$row[user_b]</td>";
+				print "<td>";
+				print "<a title='Account' href='account.php?a=".$username."&b=$row[user_b]&m=3'>Remove</a>";
+				print "<br><a title='Account' href='account.php?a=$row[user_b]'>Visit Account</a>";
+				print "</td>";
+				print "</tr>";
+			}
 		}
 
 		print "</tbody></table>";
