@@ -95,11 +95,11 @@ if ($row_count == 0) {
 			$rating_result = mysqli_query($conn, $rating_query);
 			while ($row = mysqli_fetch_array($rating_result, MYSQLI_BOTH)) {
 				if ($row[rating] == 'funny') {
-					$funny = $funny + 1
+					$funny = $funny + 1;
 				} else if ($row[rating] == 'true') {
-					$true = $true + 1
+					$true = $true + 1;
 				} else if ($row[rating] == 'tragic') {
-					$tragic = $tragic + 1
+					$tragic = $tragic + 1;
 				}
 			}
 
