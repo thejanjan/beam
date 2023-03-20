@@ -17,9 +17,11 @@ or die('Error connecting to MySQL server.');
   
   <?php
 
+/*
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+*/
 
 // Check what game we are looking at.
 $game_id = $_GET['g'];
@@ -117,9 +119,9 @@ if ($game_id == "") {
 				$user_row = mysqli_fetch_array($user_result, MYSQLI_BOTH);
 				print "<hr>";
 				print "<img src=$user_row[avatar_url] alt='Gaming' width='100' height='100' style='float:left'>";
-				print "<h2>$row[topic_name]</h2>by $row[username] - $row[timestamp]<br>";
-				print "<a title='Topic' href='forums.php?g=$gid&t=$row[topic_id]'>Open Topic</a>";
-				print "<br>";
+				print "<h2><a title='Topic' href='forums.php?g=$gid&t=$row[topic_id]'>$row[topic_name]</a></h2>";
+				print "by $row[username] - $row[timestamp]";
+				print "<br><br><br>";
 			}
 		}
  
