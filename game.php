@@ -81,9 +81,9 @@ if ($row_count == 0) {
 		print "<hr><h2>All Reviews ($row_count)</h2>";
 		$index = 0;
 		while ($row = mysqli_fetch_array($game_result, MYSQLI_BOTH)) {
-			$username = $row['username'];
-			$rating = $row['rating'];
-			$description = $row['description'];
+			$username = $row[1];
+			$rating = $row[2];
+			$description = $row[3];
 
 			$user_query = "SELECT username, avatar_url, timestamp FROM user WHERE username=$username;";
 			$user_result = mysqli_query($conn, $user_query);
@@ -91,6 +91,7 @@ if ($row_count == 0) {
 				$user_row = mysqli_fetch_array($user_result, MYSQLI_BOTH);
 				$index = $index + 1;
 				print "<hr>";
+				print "<img src=$user_row[avatar_url] alt='Gaming' width='150' height='150' style='float:right'>";
 				print "<h3>Review from $username</h3>";
 				print "<h2>A Solid $rating/100</h2>";
 				print "$description";
