@@ -141,7 +141,7 @@ else {
 	
 			if ($row_count != 0) {
 				print "<table border='1' cellpadding = '5' cellspacing = '5'><tbody>";
-				print "<th>Avatar</th><th>User</th><th>Message</th><th>Timestamp</th>";
+				print "<th>Avatar</th><th>User</th><th>Message</th>";
 
 				$index = 0;
 				while ($row = mysqli_fetch_array($msg_result, MYSQLI_BOTH)) {
@@ -152,9 +152,8 @@ else {
 					$index = $index + 1;
 					print "<tr>";
 					print "<td><p><img alt='Cool Avatar' width='100' height='100' src='$avatar'></p></td>";
-					print "<td>$row[sender]</td>";
+					print "<td>$row[sender]<br>$row[timestamp]</td>";
 					print "<td>$row[message]</td>";
-					print "<td>$row[timestamp]</td>";
 					print "</tr>";
 				}
 
