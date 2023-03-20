@@ -108,27 +108,28 @@ if ($_POST['add_block'] != "") {
 
 // If there is a B user in our GET, then we have to perform some action.
 if ($_GET['b'] != "") {
+	$user_b = htmlspecialchars($_GET['b']);
 	$action = $_GET['m'];
 
 	switch ($action) {
 		case 0:
 			// Decline Incoming Friend Request 
-			$rof_query = "DELETE FROM friendstatus WHERE user_b='$clean_username' AND user_a='$_GET[b]';";
+			$rof_query = "DELETE FROM friendstatus WHERE user_b='$clean_username' AND user_a='$user_b';";
 			mysqli_query($conn, $rof_query);
 			print "<h2>Account Update</h2>Removed incoming friend request.<hr>";
 			break;
 		case 1:
 			// Approve Incoming Friend Request
-			$rof_query = "UPDATE friendstatus SET status='yes' WHERE user_b='$clean_username' AND user_a='$_GET[b]';";
+			$rof_query = "UPDATE friendstatus SET status='yes' WHERE user_b='$clean_username' AND user_a='$user_b';";
 			mysqli_query($conn, $rof_query);
 			print "<h2>Account Update</h2>Added a brand new friend! Great job!<hr>";
 			break;
 		case 2:
 			// Block User 
-			$rof_query = "DELETE FROM friendstatus WHERE (user_a='$clean_username' AND user_b='$_GET[b]') OR (user_b='$clean_username' AND user_a='$_GET[b]');";
+			$rof_query = "DELETE FROM friendstatus WHERE (user_a='$clean_username' AND user_b='$user_b') OR (user_b='$clean_username' AND user_a='$user_b');";
 			mysqli_query($conn, $rof_query);
 
-			$write_query = "INSERT INTO friendstatus VALUES ('".$clean_username."', '".$_GET[b]."', 'block');";
+			$write_query = "INSERT INTO friendstatus VALUES ('".$clean_username."', '".$user_b."', 'block');";
 			$write_result = mysqli_query($conn, $write_query);
 			mysqli_free_result($write_result);
 
@@ -136,15 +137,15 @@ if ($_GET['b'] != "") {
 			break;
 		case 3:
 			// Remove Outgoing Friend Request
-			$rof_query = "DELETE FROM friendstatus WHERE user_a='$clean_username' AND user_b='$_GET[b]';";
+			$rof_query = "DELETE FROM friendstatus WHERE user_a='$clean_username' AND user_b='$user_b';";
 			mysqli_query($conn, $rof_query);
 			print "<h2>Account Update</h2>Removed outgoing friend request.<hr>";
 			break;
 		case 4:
 			// Remove Relation
-			$rof_query = "DELETE FROM friendstatus WHERE (user_a='$clean_username' AND user_b='$_GET[b]') OR (user_b='$clean_username' AND user_a='$_GET[b]');";
+			$rof_query = "DELETE FROM friendstatus WHERE (user_a='$clean_username' AND user_b='$user_b') OR (user_b='$clean_username' AND user_a='$user_b');";
 			mysqli_query($conn, $rof_query);
-			print "<h2>Account Update</h2>Removed friend.<hr>";
+			print "<h2>Account Update</h2>Cleared relation.<hr>";
 			break;
 	}
 }
@@ -207,7 +208,8 @@ if ($row_count == 0) {
 				print "<td><p><img alt='Cool Avatar' width='100' height='100' src='$user_row[avatar_url]'></p></td>";
 				print "<td>$other_user</td>";
 				print "<td>";
-				print "<a title='Account' href='account.php?a=".$username."&b=$other_user&m=4'>Remove</a>";
+				print "<a title='Message' href='messaging.php?a=".$username."&b=$other_user'>Open DMs</a>";
+				print "<br><a title='Account' href='account.php?a=".$username."&b=$other_user&m=4'>Remove</a>";
 				print "<br><a title='Account' href='account.php?a=$other_user'>Visit Account</a>";
 				print "</td>";
 				print "</tr>";
