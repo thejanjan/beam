@@ -18,8 +18,8 @@ or die('Error connecting to MySQL server.');
  
 print "<h1>Insta-Messaging</h1><hr>";
 
-$user_a = $_GET['a'];
-$user_b = $_GET['b'];
+$user_a = htmlspecialchars($_GET['a']);
+$user_b = htmlspecialchars($_GET['b']);
 
 if ($_POST['username'] != "") {
 	$user_a = $_POST['username'];
@@ -118,7 +118,17 @@ else {
 			// Account does not exist, lol.
 			print "The username '".$user_b."' does not exist.<br>";
 		} else {
-			print "Two user";
+			if ($_POST['message'] != "") {
+				// Send a message to user B here.
+				print "(SEND MESSAGE)";
+			}
+
+			print "You are now Insta-Messaging $user_b!<br>";
+			print "<br>Enter a message below to send it to them.";
+			print '<form action="messaging.php?a=$user_a&b=$user_b" method="POST">';
+			print '<input type="text" name="message">';
+			print '<input type="submit" value="Send">';
+			print '</form>';
 		}
 
 		mysqli_free_result($user_b_result);
@@ -134,7 +144,7 @@ mysqli_close($conn);
 ?>
 
 <hr>
-<i>Drink Chocolate Milk<br>BeamBeamPalace, Inc.</i>
+<i>Drink water please<br>BeamBeamPalace, Inc.</i>
 <br><br>
 <form>
  <input type="button" value="Return Home" onclick="window.location.href = 'index.html';">
