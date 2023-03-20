@@ -122,8 +122,8 @@ if ($row_count == 0) {
 			print "<td>$row[user_a]</td>";
 			print "<td>";
 			print "<a title='Account' href='account.php?a=".$username."&b=$row[user_a]&m=1'>Approve</a>";
-			print "<a title='Account' href='account.php?a=".$username."&b=$row[user_a]&m=0'>Decline</a>";
-			print "<a title='Account' href='account.php?a=".$username."&b=$row[user_a]&m=2'>Block</a>";
+			print "<br><a title='Account' href='account.php?a=".$username."&b=$row[user_a]&m=0'>Decline</a>";
+			print "<br><a title='Account' href='account.php?a=".$username."&b=$row[user_a]&m=2'>Block</a>";
 			print "<br><a title='Account' href='account.php?a=$row[user_a]'>Visit Account</a>";
 			print "</td>";
 			print "</tr>";
