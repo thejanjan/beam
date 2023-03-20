@@ -53,11 +53,11 @@ if ($game_id == "") {
 	
 	$game_query = "SELECT game_id, name, description, image FROM game WHERE game_id='$game_id';";
 	$game_result = mysqli_query($conn, $game_query);
-	/*
 	$row_count = mysqli_num_rows($game_result);
 	if ($row_count == 0) {
 		die();
 	}
+	/*
 	$row = mysqli_fetch_array($game_result, MYSQLI_BOTH)
 	mysqli_free_result($game_result);
 
