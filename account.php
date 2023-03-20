@@ -159,7 +159,7 @@ if ($row_count == 0) {
 		$index = 0;
 		while ($row = mysqli_fetch_array($friend_request_result, MYSQLI_BOTH)) {
 			print "do user query";
-			$user_query = "SELECT username, avatar_url, timestamp FROM user WHERE username='".$row[user_b]."';";
+			$user_query = "SELECT username, avatar_url, timestamp FROM user WHERE username='$row[user_b]';";
 			print "do user result";
 			$user_result = mysqli_query($conn, $user_query);
 			print "do check";
