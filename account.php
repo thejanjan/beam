@@ -69,7 +69,7 @@ if ($_POST['add_friend'] != "") {
 				// Send a friend request their way.
 				$write_query = "INSERT INTO friendstatus VALUES ('".$username."', '".$_POST['add_friend']."', 'request');";
 				$write_result = mysqli_query($conn, $write_query);
-
+				mysqli_free_result($write_result);
 				print "<h2>Account Update</h2>Friend request sent successfully!<hr>";
 			}
 			mysqli_free_result($af_check_relation_result);
@@ -97,6 +97,14 @@ if ($_GET['b'] != "") {
 			break;
 		case 2:
 			// Block User 
+			$rof_query = "DELETE FROM friendstatus WHERE (user_a='$clean_username' AND user_b='$_GET[b]') OR (user_b='$clean_username' AND user_a='$_GET[b]');";
+			mysqli_query($conn, $rof_query);
+
+			$write_query = "INSERT INTO friendstatus VALUES ('".$clean_username."', '".$_GET[b]."', 'block');";
+			$write_result = mysqli_query($conn, $write_query);
+			mysqli_free_result($write_result);
+
+			print "<h2>Account Update</h2>User blocked.<hr>";
 			break;
 		case 3:
 			// Remove Outgoing Friend Request
@@ -130,7 +138,7 @@ if ($row_count == 0) {
 	print "<br>(I remember.)";
 
 	// Profile Pictures
-	print "<br><h3>Set Profile Picture</h3>";
+	print "<br><h2>Set Profile Picture</h2>";
 	print "Your current profile picture is shown below.";
 	print "<td><p><img alt='Cool Avatar' width='100' height='100' src='$row[avatar_url]'></p></td>";
 	print "<i>Link: $row[avatar_url]</i>";
@@ -148,7 +156,7 @@ if ($row_count == 0) {
 
 	$row_count = mysqli_num_rows($friend_result);
 
-	print "<h3>Friends</h3>";
+	print "<h2>Friends</h2>";
 	print "You currently have <b>$row_count friends.</b><br>";
 	
 	if ($row_count != 0) {
@@ -211,7 +219,7 @@ if ($row_count == 0) {
 				print "<td>";
 				print "<a title='Account' href='account.php?a=".$username."&b=$row[user_a]&m=1'>Approve</a>";
 				print "<br><a title='Account' href='account.php?a=".$username."&b=$row[user_a]&m=0'>Decline</a>";
-				// print "<br><a title='Account' href='account.php?a=".$username."&b=$row[user_a]&m=2'>Block</a>";
+				print "<br><a title='Account' href='account.php?a=".$username."&b=$row[user_a]&m=2'>Block</a>";
 				print "<br><a title='Account' href='account.php?a=$row[user_a]'>Visit Account</a>";
 				print "</td>";
 				print "</tr>";
@@ -267,6 +275,49 @@ if ($row_count == 0) {
 	print '<input type="text" name="add_friend">';
 	print '<input type="submit" value="Send Friend Request">';
 	print '</form>';
+
+	// Blocked Folks
+	$block_query = "SELECT user_a, user_b, status FROM friendstatus WHERE user_a='".$username."' AND status='block';";
+	$block_result = mysqli_query($conn, $block_query)
+	or die(mysqli_error($conn));
+
+	$row_count = mysqli_num_rows($block_result);
+
+	print "<h3>Blocks</h3>";
+	print "You currently have <b>$row_count Beamers blocked.</b><br>";
+	
+	if ($row_count != 0) {
+		print "<table border='1' cellpadding = '5' cellspacing = '5'><tbody>";
+		print "<th>Avatar</th><th>User</th><th>Actions</th>";
+
+		$index = 0;
+		while ($row = mysqli_fetch_array($block_result, MYSQLI_BOTH)) {
+			$other_user = $row[0];
+			if ($row[0] == $username) {
+				$other_user = $row[1];
+			}
+
+			$user_query = "SELECT username, avatar_url, timestamp FROM user WHERE username='$other_user';";
+			$user_result = mysqli_query($conn, $user_query);
+			if (mysqli_num_rows($user_result) != 0) {
+				$user_row = mysqli_fetch_array($user_result, MYSQLI_BOTH);
+				$index = $index + 1;
+				print "<tr>";
+				print "<td><p><img alt='Cool Avatar' width='100' height='100' src='$user_row[avatar_url]'></p></td>";
+				print "<td>$other_user</td>";
+				print "<td>";
+				print "<a title='Account' href='account.php?a=".$username."&b=$other_user&m=4'>Unblock</a>";
+				print "<br><a title='Account' href='account.php?a=$other_user'>Visit Account</a>";
+				print "</td>";
+				print "</tr>";
+			}
+			mysqli_free_result($user_result);
+		}
+
+		print "</tbody></table>";
+	}
+
+	mysqli_free_result($block_result);
 }
 
 mysqli_free_result($read_result);
