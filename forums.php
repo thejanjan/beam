@@ -59,12 +59,12 @@ if ($game_id == "") {
 	}
 	
 	$row = mysqli_fetch_array($game_result, MYSQLI_BOTH);
-	mysqli_free_result($game_result);
 	
+	$game_name = $row[1];
+	$game_desc = $row[2];
+	$game_img = $row[3];
 
-	$game_name = $row[name];
-	$game_desc = $row[description];
-	$game_img = $row[image];
+	mysqli_free_result($game_result);
 	
 	// Any specific topic?
 	$topic_id = $_GET['t'];
