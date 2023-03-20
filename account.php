@@ -95,14 +95,9 @@ if ($_POST['add_block'] != "") {
 			$block_name = $_POST['add_block'];
 			$rof_query = "DELETE FROM friendstatus WHERE (user_a='$clean_username' AND user_b='$block_name') OR (user_b='$clean_username' AND user_a='$block_name');";
 			mysqli_query($conn, $rof_query);
-			print "1";
 
 			$write_query = "INSERT INTO friendstatus VALUES ('$clean_username', '$block_name', 'block');";
-			print "2";
-			$write_result = mysqli_query($conn, $write_query);
-			print "3";
-			mysqli_free_result($write_result);
-			print "4";
+			mysqli_query($conn, $write_query);
 
 			print "<h2>Account Update</h2>User blocked.<hr>";
 		}
