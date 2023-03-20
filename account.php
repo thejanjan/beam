@@ -30,6 +30,22 @@ $clean_username = mysqli_real_escape_string($conn, $username);
 if ($_POST['avatar'] != "") {
 	$avatar_query = "UPDATE user SET avatar_url = '".$_POST['avatar']."' WHERE username='".$clean_username."';";
 	$avatar_result = mysqli_query($conn, $avatar_query);
+
+	print "<h2>Account Update</h2>Your profile picture has been set successfully!<hr>";
+}
+
+// Perform a friend request send query if we have one set in POST.
+if ($_POST['add_friend'] != "") {
+	// No sending friend requests to ourselves.
+	if ($_POST['add_friend'] == $username) {
+		print "<h2>Account Update</h2>You cannot befriend yourself!<br><b>(DO NOT VIOLATE BEAM POLICY.)</b><hr>";
+	} else {
+		// First, ensure there is not one sent already.
+		// $avatar_query = "UPDATE user SET avatar_url = '".$_POST['avatar']."' WHERE username='".$clean_username."';";
+		// $avatar_result = mysqli_query($conn, $avatar_query);
+
+		print "<h2>Account Update</h2>Friend request sent successfully!<hr>";
+	}
 }
 
 // Test if the username exists or not.
@@ -126,7 +142,7 @@ if ($row_count == 0) {
 	mysqli_free_result($friend_request_result);
 
 	// Send Friend Request Prompt
-	print "<br><br>You can type a username here to send a friend request to them.<br>";
+	print "<br>You can type a username here to send a friend request to them.<br>";
 	print '<form action="account.php?a='.$username.'" method="POST">';
 	print '<input type="text" name="add_friend">';
 	print '<input type="submit" value="Send Friend Request">';
