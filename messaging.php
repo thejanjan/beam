@@ -143,7 +143,7 @@ else {
 				$index = 0;
 				while ($row = mysqli_fetch_array($friend_result, MYSQLI_BOTH)) {
 					$avatar = $user_a_query[avatar_url];
-					if ($row[sender] == receiver) {
+					if ($row[sender] == $user_b_query[username]) {
 						$avatar = $user_b_query[avatar_url];
 					}
 					$index = $index + 1;
