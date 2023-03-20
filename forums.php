@@ -168,8 +168,8 @@ if ($game_id == "") {
 		print "<form action='forums.php?g=$game_id&t=$topic_id' method='POST'>";
 		print "<label for='username'>Username: </label>";
 		print "<input type='text' id='username' name='username'><br>";
-		print "<label for='topic'>Topic Name: </label>";
-		print "<input type='text' id='topic' name='topic'><br>";
+		print "<label for='post'>Post: </label>";
+		print "<input type='text' id='post' name='post'><br>";
 		print "<input type='submit' value='Post'>";
 		print "</form>";
 
