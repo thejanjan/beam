@@ -30,7 +30,7 @@ $row_count = mysqli_num_rows($game_result);
 print "<br>Actually, I'll tell you: There are <b>$row_count games!</b>";
 
 while ($row = mysqli_fetch_array($game_result, MYSQLI_BOTH)) {
-	$gid = $row[game_id];
+	$gid = $row[0];
 	print "<hr>";
 	print "<img src=$row[image] alt='Gaming' width='150' height='150' style='float:left'>";
 	print "<h2>$row[name]</h2>$row[description]";
