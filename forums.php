@@ -50,7 +50,6 @@ if ($game_id == "") {
 
 } else {
 	// We are looking at a game.
-	/*
 	$game_query = "SELECT game_id, name, description, image FROM game WHERE game_id='$game_id';";
 	$game_result = mysqli_query($conn, $game_query);
 	$row_count = mysqli_num_rows($game_result);
@@ -68,6 +67,7 @@ if ($game_id == "") {
 	$topic_id = $_GET['t'];
 
 	if ($topic_id == "") {
+		/*
 		// No specific topic. List all visible topics.
 		// Start with the header.
 		print "<h1>$game_name - Topics</h1><hr>";
@@ -106,11 +106,12 @@ if ($game_id == "") {
  
 		// cleanup
 		mysqli_free_result($topic_result);
+		*/
 		
 	} else {
 		// List all posts from this topic.
 	}
-	*/
+	
 }
 
 // cleanup
