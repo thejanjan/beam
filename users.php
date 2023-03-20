@@ -55,7 +55,7 @@ mysqli_close($conn);
 <i>That is it I am all out of users Sorry</i>
 <br>
     <form>
-        <input type="button" value="Take Me Home" onclick="index.html">
+        <input type="button" value="Take Me Home" onclick="window.location.href = 'index.html';">
     </form>
 
 </body>

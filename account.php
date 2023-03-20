@@ -226,7 +226,7 @@ mysqli_close($conn);
 <i>Providing Sensitive User Information Since 1991<br>BeamBeamPalace, Inc.</i>
 <br><br>
 <form>
- <input type="button" value="Go Home" onclick="index.html">
+ <input type="button" value="Go Home" onclick="window.location.href = 'index.html';">
 </form>
 
 </body>

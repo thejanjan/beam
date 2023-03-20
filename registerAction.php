@@ -59,7 +59,7 @@ mysqli_close($conn);
 
 <br><br>
 <form>
- <input type="button" value="Home" onclick="index.html">
+ <input type="button" value="Home" onclick="window.location.href = 'index.html';">
 </form>
 
 </body>
