@@ -69,8 +69,7 @@ if ($_POST['add_friend'] != "") {
 				// There is no relation between users.
 				// Send a friend request their way.
 				$write_query = "INSERT INTO friendstatus VALUES ('".$username."', '$friendname', 'request');";
-				$write_result = mysqli_query($conn, $write_query);
-				mysqli_free_result($write_result);
+				mysqli_query($conn, $write_query);
 				print "<h2>Account Update</h2>Friend request sent successfully!<hr>";
 			}
 			mysqli_free_result($af_check_relation_result);
