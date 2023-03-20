@@ -29,15 +29,16 @@ $row_count = mysqli_num_rows($result);
 print "The Beam service is empowered by <b>$row_count brilliant members!</b><br>(And counting!!)";
 print "<br><h4>All Members</h4>";
 print "<table border='1' cellpadding = '5' cellspacing = '5'><tbody>";
-print "<th>Avatar</th><th>User</th><th>Join Date</th><th>Account Page</th>";
+print "<th>Index</th><th>Avatar</th><th>Username</th><th>Join Date</th><th>Account Page</th>";
 
 $index = 0;
 while ($row = mysqli_fetch_array($result, MYSQLI_BOTH)) {
 	$index = $index + 1;
 	print "<tr>";
+	print "<td>User #$index</td>";
 	print "<td><p><img alt='Cool Avatar' width='100' height='100' src='$row[avatar_url]'></p></td>";
-	print "<td>User #$index:<br>$row[username]</td>";
-	print "<td>Joined the Beam Family<br>$row[timestamp]</td>";
+	print "<td>$row[username]</td>";
+	print "<td>Joined the Beam Family<br>Time: $row[timestamp]</td>";
 	print "<td><a title='Account' href='account.php?a=$row[username]'>Go to Account</a></td>";
 	print "</tr>";
 }
