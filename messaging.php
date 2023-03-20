@@ -143,11 +143,11 @@ else {
 				$index = 0;
 				while ($row = mysqli_fetch_array($msg_result, MYSQLI_BOTH)) {
 					print "1";
-					$avatar = $user_a_result[1];
+					$avatar = $user_a_result['avatar_url'];
 					print "2";
-					if ($row[sender] == $user_b_result[0]) {
+					if ($row[sender] == $user_b_result['username']) {
 						print "3";
-						$avatar = $user_b_result[1];
+						$avatar = $user_b_result['avatar_url'];
 					}
 					print "4";
 					$index = $index + 1;
