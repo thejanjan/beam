@@ -20,7 +20,7 @@ or die('Error connecting to MySQL server.');
   
 <?php
  
-$query = "SELECT username, avatar_url, timestamp FROM user ORDER BY timestamp;";
+$query = "SELECT username, avatar_url, timestamp FROM user ORDER BY timestamp DESC;";
 $result = mysqli_query($conn, $query)
 or die(mysqli_error($conn));
 
