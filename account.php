@@ -119,12 +119,12 @@ if ($row_count == 0) {
 			$index = $index + 1;
 			print "<tr>";
 			print "<td><p><img alt='Cool Avatar' width='100' height='100' src='$row[avatar_url]'></p></td>";
-			print "<td>Request #$index:<br>$row[username]</td>";
+			print "<td>$row[user_a]</td>";
 			print "<td>";
-			print "<a title='Account' href='account.php?a=".$username."&b=$row[username]&m=1'>Approve</a>";
-			print "<a title='Account' href='account.php?a=".$username."&b=$row[username]&m=0'>Decline</a>";
-			print "<a title='Account' href='account.php?a=".$username."&b=$row[username]&m=2'>Block</a>";
-			print "<br><a title='Account' href='account.php?a=$row[username]'>Visit Account</a>";
+			print "<a title='Account' href='account.php?a=".$username."&b=$row[user_a]&m=1'>Approve</a>";
+			print "<a title='Account' href='account.php?a=".$username."&b=$row[user_a]&m=0'>Decline</a>";
+			print "<a title='Account' href='account.php?a=".$username."&b=$row[user_a]&m=2'>Block</a>";
+			print "<br><a title='Account' href='account.php?a=$row[user_a]'>Visit Account</a>";
 			print "</td>";
 			print "</tr>";
 		}
@@ -152,10 +152,10 @@ if ($row_count == 0) {
 			$index = $index + 1;
 			print "<tr>";
 			print "<td><p><img alt='Cool Avatar' width='100' height='100' src='$row[avatar_url]'></p></td>";
-			print "<td>Request #$index:<br>$row[username]</td>";
+			print "<td>$row[user_b]</td>";
 			print "<td>";
-			print "<a title='Account' href='account.php?a=".$username."&b=$row[username]&m=3'>Remove</a>";
-			print "<br><a title='Account' href='account.php?a=$row[username]'>Visit Account</a>";
+			print "<a title='Account' href='account.php?a=".$username."&b=$row[user_b]&m=3'>Remove</a>";
+			print "<br><a title='Account' href='account.php?a=$row[user_b]'>Visit Account</a>";
 			print "</td>";
 			print "</tr>";
 		}
