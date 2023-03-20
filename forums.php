@@ -194,7 +194,7 @@ if ($game_id == "") {
 		}
  
 		// cleanup
-		mysqli_free_result($topic_result);
+		mysqli_free_result($post_result);
 	}
 	
 }
