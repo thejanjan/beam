@@ -75,6 +75,34 @@ if ($_POST['add_friend'] != "") {
 	}
 }
 
+// If there is a B user in our GET, then we have to perform some action.
+if ($_GET['b'] != "") {
+	$action = $_GET['m'];
+
+	switch ($action) {
+		case 0:
+			// Decline Incoming Friend Request 
+			echo "test";
+			break;
+		case 1:
+			// Approve Incoming Friend Request
+			echo "test";
+			break;
+		case 2:
+			// Block User 
+			echo "test";
+			break;
+		case 3:
+			// Remove Outgoing Friend Request
+			$rof_query = "DELETE FROM friendstatus WHERE user_a='".$clean_username."' AND user_b='".$_GET['b']."';";
+			$rof_result = mysqli_query($conn, $rof_query);
+			mysqli_free_result($rof_result);
+
+			print "<h2>Account Update</h2>Removed outgoing friend request.<hr>";
+			break;
+	}
+}
+
 // Test if the username exists or not.
 $read_query = "SELECT username, avatar_url, timestamp FROM user WHERE username='".$clean_username."';";
 $read_result = mysqli_query($conn, $read_query);
