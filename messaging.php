@@ -120,7 +120,8 @@ else {
 		} else {
 			if ($_POST['message'] != "") {
 				// Send a message to user B here.
-				print "(SEND MESSAGE)";
+				$write_query = "INSERT INTO privatemessage (sender, receiver, message, timestamp) VALUES ('$user_a', '$user_b', ".$_POST['message'].", CURRENT_TIMESTAMP);";
+				mysqli_query($conn, $write_query);
 			}
 
 			print "You are now Insta-Messaging $user_b!<br>";
