@@ -16,7 +16,7 @@ or die('Error connecting to MySQL server.');
   
   <?php
  
-print "<h1>Instant Messaging</h1><hr>";
+print "<h1>Instan-Messaging</h1><hr>";
 
 $user_a = $_GET['a'];
 $user_b = $_GET['b'];
@@ -27,8 +27,12 @@ if ($_POST['username'] != "") {
 
 // case 1: no users at all
 if (($user_a == "") AND ($user_b == "")) {
-	print "No users";
-
+	print 'People on the Internet <b>LOVE to</b> Insta-Message their Friends!<br />';
+    print 'Please type in a username below for who you would like to Insta-Message under!';
+    print '<form action="messaging.php" method="POST">';
+	print '<input type="text" name="username">';
+    print '<input type="submit" value="Start Messaging">';
+    print '</form>';
 }
 // case 2: only one user
 else if (($user_a != "") XOR ($user_b != "")) {
@@ -36,12 +40,35 @@ else if (($user_a != "") XOR ($user_b != "")) {
 	if ($user == "") {
 		$user = $user_b;
 	}
-	print "One user";
+
+	// Test if the username exists or not.
+	$read_query = "SELECT username, avatar_url, timestamp FROM user WHERE username='".$user."';";
+	$read_result = mysqli_query($conn, $read_query);
+	$row_count = mysqli_num_rows($read_result);
+
+	if ($row_count == 0) {
+		// Account does not exist, lol.
+		print "The username '".$user."' does not exist.<br>";
+		print "Please <a title='Register' href='register.html'>click here</a> to register an account.";
+	} else {
+		print "One user";
+	}
 }
 
 // case 3: both users exist
 else {
-	print "Yes users";
+	// Test if the username exists or not.
+	$read_query = "SELECT username, avatar_url, timestamp FROM user WHERE username='".$user."';";
+	$read_result = mysqli_query($conn, $read_query);
+	$row_count = mysqli_num_rows($read_result);
+
+	if ($row_count == 0) {
+		// Account does not exist, lol.
+		print "The username '".$user."' does not exist.<br>";
+		print "Please <a title='Register' href='register.html'>click here</a> to register an account.";
+	} else {
+		print "Two user";
+	}
 }
 
 // cleanup
