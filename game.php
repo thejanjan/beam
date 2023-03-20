@@ -47,6 +47,27 @@ if ($row_count == 0) {
 		mysqli_free_result($user_exists_result);
 	}
 
+	// Check POST request for adding a review rating
+	if ($_POST['rusername'] != "") {
+		// Get post constants.
+		$username = $_POST['rusername'];
+		$review_id = $_GET['r'];
+		$rating = $_POST['rating'];
+
+		// First, ensure that user even exists.
+		$user_exists_query = "SELECT username, avatar_url, timestamp FROM user WHERE username='$username';";
+		$user_exists_result = mysqli_query($conn, $user_exists_query);
+		if (mysqli_num_rows($user_exists_result) != 0) {
+			// Add the review.
+			$delete_query = "DELETE FROM reviewrating WHERE (review_id='$review_id' AND rater_name='$username');";
+			mysqli_query($conn, $delete_query);
+
+			$write_query = "INSERT INTO reviewrating (review_id, rater_name, rating) VALUES ('$review_id', '$username', '$rating');";
+			mysqli_query($conn, $write_query);
+		}
+		mysqli_free_result($user_exists_result);
+	}
+
 	// Print header fields.
 	print "<h1>$row[name]</h1><h3>$"."$row[cost]</h3><hr>";
 	print "<img src=$row[image] alt='Gaming' width='450' height='450' style='float:right'>";
