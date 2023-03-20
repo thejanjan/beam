@@ -37,7 +37,19 @@ if ($row_count == 0) {
 	print "<br>Publisher: $row[publisher]";
 	print "<br>Developer: $row[developer]";
 	print "<br>Website: <a>$row[website]</a>";
-	
+
+	print "<hr><h3>Reviews</h3>";
+	print "Leave a review on this game below!<br>";
+	<form action="game.php?g=$game_id" method="POST">
+
+		<label for="username">Username: </label>
+        <input type="text" id="username" name="username"><br>
+		<label for="review">Review: </label>
+		<input type="text" id="review" name="review"><br>
+		<label for="rating">Rating: </label>
+		<input type="range" id="rating" name="rating" min="0" max="100"><br>
+        <input type="submit" value="Submit">
+    </form>
 }
 
 // cleanup
