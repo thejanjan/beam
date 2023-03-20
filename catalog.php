@@ -42,6 +42,7 @@ while ($row = mysqli_fetch_array($game_result, MYSQLI_BOTH)) {
 }
  
 // cleanup
+mysqli_free_result($game_result);
 mysqli_close($conn);
 
 
