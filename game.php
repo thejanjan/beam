@@ -29,6 +29,25 @@ if ($row_count == 0) {
 } else {
 	$row = mysqli_fetch_array($game_result, MYSQLI_BOTH);
 
+	// Check POST request for adding a review
+	if ($_POST['username'] != "") {
+		// Get post constants.
+		$username = $_POST['username'];
+		$review = $_POST['review'];
+		$rating = $_POST['rating'];
+
+		// First, ensure that user even exists.
+		$user_exists_query = "SELECT username, avatar_url, timestamp FROM user WHERE username='$username';";
+		$user_exists_result = mysqli_query($conn, $user_exists_query);
+		if (mysqli_num_rows($user_exists_result) != 0) {
+			// Add the review.
+			$write_query = "INSERT INTO friendstatus (game_id, username, rating, description) VALUES ('$game_id', '$username', '$rating', '$review');";
+			mysqli_query($conn, $write_query);
+		}
+		mysqli_free_result($user_exists_result);
+	}
+
+	// Print header fields.
 	print "<h1>$row[name]</h1><h3>$"."$row[cost]</h3><hr>";
 	print "<img src=$row[image] alt='Gaming' width='450' height='450' style='float:right'>";
 	print "$row[description]";
@@ -38,7 +57,8 @@ if ($row_count == 0) {
 	print "<br>Developer: $row[developer]";
 	print "<br>Website: <a>$row[website]</a>";
 
-	print "<hr><h3>Reviews</h3>";
+	// Leave a Review entry
+	print "<hr><h3>Leave a Review</h3>";
 	print "Leave a review on this game below!<br>";
 	print "<form action='game.php?g=$game_id' method='POST'>";
 	print "<label for='username'>Username: </label>";
@@ -49,6 +69,9 @@ if ($row_count == 0) {
 	print "<input type='range' id='rating' name='rating' min='0' max='100'><br>";
 	print "<input type='submit' value='Submit'>";
 	print "</form>";
+
+	// List all reviews
+	print "<hr><h2>All Reviews</h2>";
 }
 
 // cleanup
