@@ -118,10 +118,8 @@ else {
 			// Account does not exist, lol.
 			print "The username '".$user_b."' does not exist.<br>";
 		} else {
-			print "getting rows";
 			$row_a = mysqli_fetch_array($user_a_result, MYSQLI_BOTH);
 			$row_b = mysqli_fetch_array($user_b_result, MYSQLI_BOTH);
-			print "rows got";
 
 			if ($_POST['message'] != "") {
 				// Send a message to user B here.
