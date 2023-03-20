@@ -60,7 +60,7 @@ if ($row_count == 0) {
 	print '<input type="submit" value="Set Avatar">';
 	print '</form>';
 	
-	// Friend Requests
+	// Incoming Friend Requests
 	$friend_request_query = "SELECT user_a, user_b, status FROM friendstatus WHERE user_b='".$username."' AND status='request';";
 	$friend_request_result = mysqli_query($conn, $friend_request_query)
 	or die(mysqli_error($conn));
@@ -84,6 +84,37 @@ if ($row_count == 0) {
 			print "<a title='Account' href='account.php?a=".$username."&b=$row[username]&m=1'>Approve</a>";
 			print "<a title='Account' href='account.php?a=".$username."&b=$row[username]&m=0'>Decline</a>";
 			print "<a title='Account' href='account.php?a=".$username."&b=$row[username]&m=2'>Block</a>";
+			print "<br><a title='Account' href='account.php?a=$row[username]'>Visit Account</a>";
+			print "</td>";
+			print "</tr>";
+		}
+
+		print "</tbody></table>";
+	}
+
+	mysqli_free_result($friend_request_result);
+
+	// Outgoing Friend Requests
+	$friend_request_query = "SELECT user_a, user_b, status FROM friendstatus WHERE user_a='".$username."' AND status='request';";
+	$friend_request_result = mysqli_query($conn, $friend_request_query)
+	or die(mysqli_error($conn));
+
+	$row_count = mysqli_num_rows($friend_request_result);
+
+	print "<br>You currently have <b>$row_count outgoing friend requests.</b><br>";
+	
+	if ($row_count != 0) {
+		print "<table border='1' cellpadding = '5' cellspacing = '5'><tbody>";
+		print "<th>Avatar</th><th>User</th><th>Actions</th>";
+
+		$index = 0;
+		while ($row = mysqli_fetch_array($friend_request_result, MYSQLI_BOTH)) {
+			$index = $index + 1;
+			print "<tr>";
+			print "<td><p><img alt='Cool Avatar' width='100' height='100' src='$row[avatar_url]'></p></td>";
+			print "<td>Request #$index:<br>$row[username]</td>";
+			print "<td>";
+			print "<a title='Account' href='account.php?a=".$username."&b=$row[username]&m=3'>Remove</a>";
 			print "<br><a title='Account' href='account.php?a=$row[username]'>Visit Account</a>";
 			print "</td>";
 			print "</tr>";
