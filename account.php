@@ -104,6 +104,12 @@ if ($_GET['b'] != "") {
 			mysqli_query($conn, $rof_query);
 			print "<h2>Account Update</h2>Removed outgoing friend request.<hr>";
 			break;
+		case 4:
+			// Remove Relation
+			$rof_query = "DELETE FROM friendstatus WHERE (user_a='$clean_username' AND user_b='$_GET[b]') OR (user_b='$clean_username' AND user_a='$_GET[b]');";
+			mysqli_query($conn, $rof_query);
+			print "<h2>Account Update</h2>Removed friend.<hr>";
+			break;
 	}
 }
 
@@ -134,6 +140,44 @@ if ($row_count == 0) {
 	print '<input type="text" name="avatar">';
 	print '<input type="submit" value="Set Avatar">';
 	print '</form>';
+
+	// Friends
+	$friend_query = "SELECT user_a, user_b, status FROM friendstatus WHERE (user_a='".$username."' OR user_b='".$username."') AND status='yes';";
+	$friend_result = mysqli_query($conn, $friend_query)
+	or die(mysqli_error($conn));
+
+	$row_count = mysqli_num_rows($friend_result);
+
+	print "<h3>Friends</h3>";
+	print "<br>You currently have <b>$row_count friends.</b><br>";
+	
+	if ($row_count != 0) {
+		print "<table border='1' cellpadding = '5' cellspacing = '5'><tbody>";
+		print "<th>Avatar</th><th>User</th><th>Actions</th>";
+
+		$index = 0;
+		while ($row = mysqli_fetch_array($friend_result, MYSQLI_BOTH)) {
+			$user_query = "SELECT username, avatar_url, timestamp FROM user WHERE username='$row[user_b]';";
+			$user_result = mysqli_query($conn, $user_query);
+			if (mysqli_num_rows($user_result) != 0) {
+				$user_row = mysqli_fetch_array($user_result, MYSQLI_BOTH);
+				$index = $index + 1;
+				print "<tr>";
+				print "<td><p><img alt='Cool Avatar' width='100' height='100' src='$user_row[avatar_url]'></p></td>";
+				print "<td>$row[user_b]</td>";
+				print "<td>";
+				print "<a title='Account' href='account.php?a=".$username."&b=$row[user_b]&m=4'>Remove</a>";
+				print "<br><a title='Account' href='account.php?a=$row[user_b]'>Visit Account</a>";
+				print "</td>";
+				print "</tr>";
+			}
+			mysqli_free_result($user_result);
+		}
+
+		print "</tbody></table>";
+	}
+
+	mysqli_free_result($friend_result);
 	
 	// Incoming Friend Requests
 	$friend_request_query = "SELECT user_a, user_b, status FROM friendstatus WHERE user_b='".$username."' AND status='request';";
