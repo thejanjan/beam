@@ -57,9 +57,10 @@ if ($game_id == "") {
 	if ($row_count == 0) {
 		die();
 	}
-	/*
+	
 	$row = mysqli_fetch_array($game_result, MYSQLI_BOTH)
 	mysqli_free_result($game_result);
+	/*
 
 	$game_name = $row[name];
 	$game_desc = $row[description];
