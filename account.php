@@ -130,8 +130,7 @@ if ($_GET['b'] != "") {
 			mysqli_query($conn, $rof_query);
 
 			$write_query = "INSERT INTO friendstatus VALUES ('".$clean_username."', '".$user_b."', 'block');";
-			$write_result = mysqli_query($conn, $write_query);
-			mysqli_free_result($write_result);
+			mysqli_query($conn, $write_query);
 
 			print "<h2>Account Update</h2>User blocked.<hr>";
 			break;
