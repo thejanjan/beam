@@ -119,7 +119,7 @@ if ($row_count == 0) {
 
 		$index = 0;
 		while ($row = mysqli_fetch_array($friend_request_result, MYSQLI_BOTH)) {
-			$user_query = "SELECT username, avatar_url, timestamp FROM user WHERE username='".$row[user_a]."';";
+			$user_query = "SELECT username, avatar_url, timestamp FROM user WHERE username='$row[user_a]';";
 			$user_result = mysqli_query($conn, $user_query);
 			if (mysqli_num_rows($user_result) != 0) {
 				$user_row = mysqli_fetch_array($user_result, MYSQLI_BOTH);
@@ -158,15 +158,10 @@ if ($row_count == 0) {
 
 		$index = 0;
 		while ($row = mysqli_fetch_array($friend_request_result, MYSQLI_BOTH)) {
-			print "do user query";
 			$user_query = "SELECT username, avatar_url, timestamp FROM user WHERE username='$row[user_b]';";
-			print "do user result";
 			$user_result = mysqli_query($conn, $user_query);
-			print "do check";
 			if (mysqli_num_rows($user_result) != 0) {
-				print "get row";
 				$user_row = mysqli_fetch_array($user_result, MYSQLI_BOTH);
-				print "post row";
 				$index = $index + 1;
 				print "<tr>";
 				print "<td><p><img alt='Cool Avatar' width='100' height='100' src='$user_row[avatar_url]'></p></td>";
