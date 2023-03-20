@@ -84,6 +84,7 @@ if ($game_id == "") {
 		print "</form>";
 
 		// And now the topic list.
+		/*
 		$topic_query = "SELECT topic_id, game_id, username, topic_name, timestamp FROM topic WHERE game_id=$game_id;";
 		$topic_result = mysqli_query($conn, $topic_query)
 		or die(mysqli_error($conn));
@@ -104,6 +105,7 @@ if ($game_id == "") {
  
 		// cleanup
 		mysqli_free_result($topic_result);
+		*/
 	} else {
 		// List all posts from this topic.
 	}
