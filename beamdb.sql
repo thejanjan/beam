@@ -38,7 +38,7 @@ CREATE TABLE game(
   publisher VARCHAR(20),
   developer VARCHAR(20),
   website VARCHAR(50),
-  image VARCHAR(80),
+  image VARCHAR(200),
 
   PRIMARY KEY(game_id)
 );

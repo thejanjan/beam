@@ -48,17 +48,52 @@ if ($row_count == 0) {
 	print "Remember that beautiful time of $row[timestamp]? The exact time you registered for Beam?";
 	print "<br>(I remember.)";
 
+	// Profile Pictures
 	print "<br><h3>Set Profile Picture</h3>";
 	print "Your current profile picture is shown below.";
-	print "<td><p><img alt='Cool Avatar' width='100' height='100' src='$row[avatar_url]' width='100' height='100'></p></td>";
+	print "<td><p><img alt='Cool Avatar' width='100' height='100' src='$row[avatar_url]'></p></td>";
 	print "<i>Link: $row[avatar_url]</i>";
 	print "<br><br>You can put a new link to an image to set it as your avatar below.<br>";
-
 
 	print '<form action="account.php?a='.$username.'" method="POST">';
 	print '<input type="text" name="avatar">';
 	print '<input type="submit" value="Set Avatar">';
 	print '</form>';
+	
+	// Friend Requests
+	$friend_request_query = "SELECT user_a, user_b, status FROM friendstatus WHERE user_b='".$username."' AND status='request';";
+	$friend_request_result = mysqli_query($conn, $friend_request_query)
+	or die(mysqli_error($conn));
+
+	$row_count = mysqli_num_rows($friend_request_result);
+
+	print "<br><h3>Friend Requests</h3>";
+	print "You currently have <b>$row_count incoming friend requests.</b><br>";
+	
+	if ($row_count != 0) {
+		print "<table border='1' cellpadding = '5' cellspacing = '5'><tbody>";
+		print "<th>Avatar</th><th>User</th><th>Actions</th>";
+
+		$index = 0;
+		while ($row = mysqli_fetch_array($friend_request_result, MYSQLI_BOTH)) {
+			$index = $index + 1;
+			print "<tr>";
+			print "<td><p><img alt='Cool Avatar' width='100' height='100' src='$row[avatar_url]'></p></td>";
+			print "<td>Request #$index:<br>$row[username]</td>";
+			print "<td>";
+			print "<a title='Account' href='account.php?a=".$username."&b=$row[username]&m=1'>Approve</a>";
+			print "<a title='Account' href='account.php?a=".$username."&b=$row[username]&m=0'>Decline</a>";
+			print "<a title='Account' href='account.php?a=".$username."&b=$row[username]&m=2'>Block</a>";
+			print "<br><a title='Account' href='account.php?a=$row[username]'>Visit Account</a>";
+			print "</td>";
+			print "</tr>";
+		}
+
+		print "</tbody></table>";
+	}
+
+	mysqli_free_result($friend_request_result);
+
 	
 }
 
