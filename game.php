@@ -16,7 +16,6 @@ or die('Error connecting to MySQL server.');
 	<body bgcolor="white">
   
   <?php
-  ini_set('display_errors', 1); ini_set('display_startup_errors', 1); error_reporting(E_ALL);
 
 $game_id = $_GET['g'];
 $game_query = "SELECT game_id, name, description, releasedate, cost, publisher, developer, website, image FROM game WHERE game_id='$game_id';";
@@ -116,7 +115,6 @@ if ($row_count == 0) {
 			$rating_result = mysqli_query($conn, $rating_query);
 			while ($row = mysqli_fetch_array($rating_result, MYSQLI_BOTH)) {
 				$rating = $row[1];
-				print "$rating";
 				if (strcmp($rating, "funny") == 0) {
 					$funny = $funny + 1;
 				} else if (strcmp($rating, "true") == 0) {
