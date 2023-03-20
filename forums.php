@@ -130,7 +130,7 @@ if ($game_id == "") {
 		
 	} else {
 		// List all posts from this topic.
-		$topic_query = "SELECT topic_id, username, topic_name, timestamp FROM topic WHERE topic_id='topic_id';";
+		$topic_query = "SELECT topic_id, username, topic_name, timestamp FROM topic WHERE topic_id='$topic_id';";
 		$topic_result = mysqli_query($conn, $topic_query);
 		$row_count = mysqli_num_rows($topic_result);
 		if ($row_count == 0) {
