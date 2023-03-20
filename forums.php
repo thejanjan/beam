@@ -175,7 +175,7 @@ if ($game_id == "") {
 
 		// And now the topic list.
 		
-		$post_query = "SELECT topic_id, username, message, timestamp FROM topic WHERE topic_id=$topic_id ORDER BY timestamp DESC;";
+		$post_query = "SELECT topic_id, username, message, timestamp FROM post WHERE topic_id=$topic_id ORDER BY timestamp DESC;";
 		$post_result = mysqli_query($conn, $post_query)
 		or die(mysqli_error($conn));
 		$row_count = mysqli_num_rows($post_result);
