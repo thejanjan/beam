@@ -98,8 +98,8 @@ if ($row_count == 0) {
 				print "<br><br>";
 				print "<i>What emotion did this review spark?</i><br>";
 				print "<form action='game.php?g=$game_id&r=$review_id' method='POST'>";
-				print "<label for='review_username'>Username: </label>";
-				print "<input type='text' id='username' name='username'><br>";
+				print "<label for='rusername'>Username: </label>";
+				print "<input type='text' id='rusername' name='rusername'><br>";
 				print "<input type='radio' id='funny' name='rating' value='funny'>";
 				print "<label for='funny'>😂 Funny</label><br>";
 				print "<input type='radio' id='true' name='rating' value='true'>";
