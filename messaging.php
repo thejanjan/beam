@@ -16,7 +16,7 @@ or die('Error connecting to MySQL server.');
   
   <?php
  
-print "<h1>Instan-Messaging</h1><hr>";
+print "<h1>Insta-Messaging</h1><hr>";
 
 $user_a = $_GET['a'];
 $user_b = $_GET['b'];
@@ -42,33 +42,89 @@ else if (($user_a != "") XOR ($user_b != "")) {
 	}
 
 	// Test if the username exists or not.
-	$read_query = "SELECT username, avatar_url, timestamp FROM user WHERE username='".$user."';";
-	$read_result = mysqli_query($conn, $read_query);
-	$row_count = mysqli_num_rows($read_result);
+	$user_query = "SELECT username, avatar_url, timestamp FROM user WHERE username='".$user."';";
+	$user_result = mysqli_query($conn, $user_query);
+	$row_count = mysqli_num_rows($user_result);
 
 	if ($row_count == 0) {
 		// Account does not exist, lol.
 		print "The username '".$user."' does not exist.<br>";
 		print "Please <a title='Register' href='register.html'>click here</a> to register an account.";
 	} else {
-		print "One user";
+		// Friend selection to message
+		$friend_query = "SELECT user_a, user_b, status FROM friendstatus WHERE (user_a='".$user."' OR user_b='".$user."') AND status='yes';";
+		$friend_result = mysqli_query($conn, $friend_query)
+		or die(mysqli_error($conn));
+
+		$row_count = mysqli_num_rows($friend_result);
+	
+		if ($row_count != 0) {
+			print "Please select a friend to Insta-Message!";
+			print "<table border='1' cellpadding = '5' cellspacing = '5'><tbody>";
+			print "<th>Avatar</th><th>User</th><th>Actions</th>";
+
+			$index = 0;
+			while ($row = mysqli_fetch_array($friend_result, MYSQLI_BOTH)) {
+				$other_user = $row[0];
+				if ($row[0] == $username) {
+					$other_user = $row[1];
+				}
+
+				$user_query = "SELECT username, avatar_url, timestamp FROM user WHERE username='$other_user';";
+				$user_result = mysqli_query($conn, $user_query);
+				if (mysqli_num_rows($user_result) != 0) {
+					$user_row = mysqli_fetch_array($user_result, MYSQLI_BOTH);
+					$index = $index + 1;
+					print "<tr>";
+					print "<td><p><img alt='Cool Avatar' width='100' height='100' src='$user_row[avatar_url]'></p></td>";
+					print "<td>$other_user</td>";
+					print "<td>";
+					print "<a title='Message' href='messaging.php?a=".$username."&b=$other_user'>Start Messaging</a>";
+					print "<br><a title='Account' href='account.php?a=$other_user'>Visit Account</a>";
+					print "</td>";
+					print "</tr>";
+				}
+				mysqli_free_result($user_result);
+			}
+
+			print "</tbody></table>";
+		} else {
+			print "You do not have any friends that you can Insta-Message!";
+		}
+
+		mysqli_free_result($friend_result);
 	}
+
+	mysqli_free_result($user_result);
 }
 
 // case 3: both users exist
 else {
 	// Test if the username exists or not.
-	$read_query = "SELECT username, avatar_url, timestamp FROM user WHERE username='".$user."';";
-	$read_result = mysqli_query($conn, $read_query);
-	$row_count = mysqli_num_rows($read_result);
+	$user_a_query = "SELECT username, avatar_url, timestamp FROM user WHERE username='".$user_a."';";
+	$user_a_result = mysqli_query($conn, $user_a_query);
+	$row_count = mysqli_num_rows($user_a_result);
 
 	if ($row_count == 0) {
 		// Account does not exist, lol.
-		print "The username '".$user."' does not exist.<br>";
+		print "The username '".$user_a."' does not exist.<br>";
 		print "Please <a title='Register' href='register.html'>click here</a> to register an account.";
 	} else {
-		print "Two user";
+		$user_b_query = "SELECT username, avatar_url, timestamp FROM user WHERE username='".$user_b."';";
+		$user_b_result = mysqli_query($conn, $user_b_query);
+		$row_count = mysqli_num_rows($user_b_result);
+
+		if ($row_count == 0) {
+			// Account does not exist, lol.
+			print "The username '".$user_b."' does not exist.<br>";
+		} else {
+			print "Two user";
+		}
+
+		mysqli_free_result($user_b_result);
 	}
+
+	mysqli_free_result($user_a_result);
 }
 
 // cleanup
