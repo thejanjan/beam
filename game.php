@@ -96,20 +96,18 @@ if ($row_count == 0) {
 				print "<h2>Review from $username: $rating/100</h2>";
 				print "$description";
 				print "<br><br>";
-				print "<details>";
-				print "<summary><i>What emotion did this review spark?</i><br><span class="icon">V</span></summary>";
-				print "<p><form action='game.php?g=$game_id&r=$review_id' method='POST'>";
+				print "<i>What emotion did this review spark?</i><br>";
+				print "<form action='game.php?g=$game_id&r=$review_id' method='POST'>";
+				print "<label for='review_username'>Username: </label>";
+				print "<input type='text' id='username' name='username'><br>";
 				print "<input type='radio' id='funny' name='rating' value='funny'>";
 				print "<label for='funny'>😂 Funny</label><br>";
 				print "<input type='radio' id='true' name='rating' value='true'>";
 				print "<label for='true'>✅ True</label><br>";
 				print "<input type='radio' id='tragic' name='rating' value='tragic'>";
 				print "<label for='tragic'>💧 Tragic</label><br>";
-				print "<input type='text' id='review_username' name='review_username'><br>";
-				print "<label for='review_username'>Username: </label>";
 				print "<input type='submit' value='Submit'>";
-				print "</form></p>";
-				print "</details>";
+				print "</form>";
 			}
 			mysqli_free_result($user_result);
 		}
