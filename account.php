@@ -30,6 +30,7 @@ $clean_username = mysqli_real_escape_string($conn, $username);
 if ($_POST['avatar'] != "") {
 	$avatar_query = "UPDATE user SET avatar_url = '".$_POST['avatar']."' WHERE username='".$clean_username."';";
 	$avatar_result = mysqli_query($conn, $avatar_query);
+	mysqli_free_result($avatar_result);
 
 	print "<h2>Account Update</h2>Your profile picture has been set successfully!<hr>";
 }
@@ -68,7 +69,9 @@ if ($_POST['add_friend'] != "") {
 
 				print "<h2>Account Update</h2>Friend request sent successfully!<hr>";
 			}
+			mysqli_free_result($af_check_relation_result);
 		}
+		mysqli_free_result($user_exists_result);
 	}
 }
 
@@ -116,10 +119,10 @@ if ($row_count == 0) {
 
 		$index = 0;
 		while ($row = mysqli_fetch_array($friend_request_result, MYSQLI_BOTH)) {
-			$user_exists_query = "SELECT username, avatar_url, timestamp FROM user WHERE username='".$row[user_a]."';";
-			$user_exists_result = mysqli_query($conn, $user_exists_query);
-			if (mysqli_num_rows($user_exists_result) != 0) {
-				$user_row = mysqli_fetch_array($user_exists_result, MYSQLI_BOTH);
+			$user_query = "SELECT username, avatar_url, timestamp FROM user WHERE username='".$row[user_a]."';";
+			$user_result = mysqli_query($conn, $user_query);
+			if (mysqli_num_rows($user_result) != 0) {
+				$user_row = mysqli_fetch_array($user_result, MYSQLI_BOTH);
 				$index = $index + 1;
 				print "<tr>";
 				print "<td><p><img alt='Cool Avatar' width='100' height='100' src='$user_row[avatar_url]'></p></td>";
@@ -132,6 +135,7 @@ if ($row_count == 0) {
 				print "</td>";
 				print "</tr>";
 			}
+			mysqli_free_result($user_result);
 		}
 
 		print "</tbody></table>";
@@ -154,10 +158,10 @@ if ($row_count == 0) {
 
 		$index = 0;
 		while ($row = mysqli_fetch_array($friend_request_result, MYSQLI_BOTH)) {
-			$user_exists_query = "SELECT username, avatar_url, timestamp FROM user WHERE username='".$row[user_a]."';";
-			$user_exists_result = mysqli_query($conn, $user_exists_query);
-			if (mysqli_num_rows($user_exists_result) != 0) {
-				$user_row = mysqli_fetch_array($user_exists_result, MYSQLI_BOTH);
+			$user_query = "SELECT username, avatar_url, timestamp FROM user WHERE username='".$row[user_b]."';";
+			$user_result = mysqli_query($conn, $user_query);
+			if (mysqli_num_rows($user_result) != 0) {
+				$user_row = mysqli_fetch_array($user_result, MYSQLI_BOTH);
 				$index = $index + 1;
 				print "<tr>";
 				print "<td><p><img alt='Cool Avatar' width='100' height='100' src='$user_row[avatar_url]'></p></td>";
@@ -168,6 +172,7 @@ if ($row_count == 0) {
 				print "</td>";
 				print "</tr>";
 			}
+			mysqli_free_result($user_result);
 		}
 
 		print "</tbody></table>";
