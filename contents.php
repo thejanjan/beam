@@ -27,14 +27,14 @@ $query = "SELECT username, avatar_url, timestamp FROM user;";
 $result = mysqli_query($conn, $query);
 print "<table border='1' cellpadding = '5' cellspacing = '5'><tbody>";
 print "<th>index</th><th>username</th><th>avatar_url</th><th>timestamp</th>";
-$index = $row_count + 1;
+$index = 0;
 while ($row = mysqli_fetch_array($result, MYSQLI_BOTH)) {
-	$index = $index - 1;
+	$index = $index + 1;
 	print "<tr>";
 	print "<td>$index</td>";
-	print "<td>$username</td>";
-	print "<td>$avatar_url</td>";
-	print "<td>$timestamp</td>";
+	print "<td>$row[username]</td>";
+	print "<td>$row[avatar_url]</td>";
+	print "<td>$row[timestamp]</td>";
 	print "</tr>";
 }
 print "</tbody></table>";
