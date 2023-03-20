@@ -97,7 +97,7 @@ if ($row_count == 0) {
 				print "$description";
 				print "<br><br>";
 				print "<i>What emotion did this review spark?</i><br><span class="icon">V</span>";
-				print "<p><form action='game.php?g=$game_id&r=$review_id' method='POST'>";
+				print "<form action='game.php?g=$game_id&r=$review_id' method='POST'>";
 				print "<input type='radio' id='funny' name='rating' value='funny'>";
 				print "<label for='funny'>😂 Funny</label><br>";
 				print "<input type='radio' id='true' name='rating' value='true'>";
