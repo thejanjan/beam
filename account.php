@@ -38,18 +38,19 @@ if ($_POST['avatar'] != "") {
 // Perform a friend request send query if we have one set in POST.
 if ($_POST['add_friend'] != "") {
 	// No sending friend requests to ourselves.
-	if ($_POST['add_friend'] == $username) {
+	$friendname = $_POST['add_friend'];
+	if ($friendname == $username) {
 		print "<h2>Account Update</h2>You cannot befriend yourself!<br><b>(DO NOT VIOLATE BEAM POLICY.)</b><hr>";
 	} else {
 		// First, ensure that user even exists.
-		$user_exists_query = "SELECT username, avatar_url, timestamp FROM user WHERE username='".$_POST['add_friend']."';";
+		$user_exists_query = "SELECT username, avatar_url, timestamp FROM user WHERE username='$friendname';";
 		$user_exists_result = mysqli_query($conn, $user_exists_query);
 		if (mysqli_num_rows($user_exists_result) == 0) {
 			// No user exists.
 			print "<h2>Account Update</h2>That user does not exist!<hr>";
 		} else {
 			// Now, ensure there is not one sent already.
-			$af_check_relation_query = "SELECT user_a, user_b, status FROM friendstatus WHERE (user_a='".$clean_username."' AND user_b='".$_POST['add_friend']."') OR (user_a='".$_POST['add_friend']."' AND user_b='".$clean_username."');";
+			$af_check_relation_query = "SELECT user_a, user_b, status FROM friendstatus WHERE (user_a='".$clean_username."' AND user_b='$friendname') OR (user_a='$friendname' AND user_b='".$clean_username."');";
 			$af_check_relation_result = mysqli_query($conn, $af_check_relation_query);
 			if (mysqli_num_rows($af_check_relation_result) != 0) {
 				// Relation exists, check relation and give relevant error message
@@ -67,7 +68,7 @@ if ($_POST['add_friend'] != "") {
 			} else {
 				// There is no relation between users.
 				// Send a friend request their way.
-				$write_query = "INSERT INTO friendstatus VALUES ('".$username."', '".$_POST['add_friend']."', 'request');";
+				$write_query = "INSERT INTO friendstatus VALUES ('".$username."', '$friendname', 'request');";
 				$write_result = mysqli_query($conn, $write_query);
 				mysqli_free_result($write_result);
 				print "<h2>Account Update</h2>Friend request sent successfully!<hr>";
