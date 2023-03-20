@@ -91,7 +91,7 @@ if ($row_count == 0) {
 			$true = 0;
 			$tragic = 0;
 
-			$rating_query = "SELECT username, avatar_url, timestamp FROM user WHERE username='$username';";
+			$rating_query = "SELECT review_id, rating FROM reviewrating WHERE review_id='$review_id';";
 			$rating_result = mysqli_query($conn, $rating_query);
 			while ($row = mysqli_fetch_array($rating_result, MYSQLI_BOTH)) {
 				if ($row[rating] == 'funny') {
