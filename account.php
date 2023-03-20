@@ -29,8 +29,7 @@ $clean_username = mysqli_real_escape_string($conn, $username);
 // Perform an avatar URL post query if we have one set in POST.
 if ($_POST['avatar'] != "") {
 	$avatar_query = "UPDATE user SET avatar_url = '".$_POST['avatar']."' WHERE username='".$clean_username."';";
-	$avatar_result = mysqli_query($conn, $avatar_query);
-	mysqli_free_result($avatar_result);
+	mysqli_query($conn, $avatar_query);
 
 	print "<h2>Account Update</h2>Your profile picture has been set successfully!<hr>";
 }
