@@ -33,8 +33,8 @@ while ($row = mysqli_fetch_array($game_result, MYSQLI_BOTH)) {
 	print "<hr>";
 	print "<img src=$row[image] alt='Gaming' width='150' height='150' style='float:left'>";
 	print "<h3>$row[name]</h3>$row[description]";
-	print "<h2>Facts</h2>";
-	print "<br><br>Price: $"."$row[cost]";
+	print "<h2>$"."$row[cost]</h2>";
+	print "<br>Open Game Page | See Forum Discussion<br>";
 }
  
 // cleanup
