@@ -149,7 +149,7 @@ if ($row_count == 0) {
 	$row_count = mysqli_num_rows($friend_result);
 
 	print "<h3>Friends</h3>";
-	print "<br>You currently have <b>$row_count friends.</b><br>";
+	print "You currently have <b>$row_count friends.</b><br>";
 	
 	if ($row_count != 0) {
 		print "<table border='1' cellpadding = '5' cellspacing = '5'><tbody>";
@@ -157,17 +157,19 @@ if ($row_count == 0) {
 
 		$index = 0;
 		while ($row = mysqli_fetch_array($friend_result, MYSQLI_BOTH)) {
-			$user_query = "SELECT username, avatar_url, timestamp FROM user WHERE username='$row[user_b]';";
+			$other_user = ($row[user_a]) ? ($row[user_a] != $username) : ($row[user_b]);
+
+			$user_query = "SELECT username, avatar_url, timestamp FROM user WHERE username='$other_user';";
 			$user_result = mysqli_query($conn, $user_query);
 			if (mysqli_num_rows($user_result) != 0) {
 				$user_row = mysqli_fetch_array($user_result, MYSQLI_BOTH);
 				$index = $index + 1;
 				print "<tr>";
 				print "<td><p><img alt='Cool Avatar' width='100' height='100' src='$user_row[avatar_url]'></p></td>";
-				print "<td>$row[user_b]</td>";
+				print "<td>$other_user</td>";
 				print "<td>";
-				print "<a title='Account' href='account.php?a=".$username."&b=$row[user_b]&m=4'>Remove</a>";
-				print "<br><a title='Account' href='account.php?a=$row[user_b]'>Visit Account</a>";
+				print "<a title='Account' href='account.php?a=".$username."&b=$other_user&m=4'>Remove</a>";
+				print "<br><a title='Account' href='account.php?a=$other_user'>Visit Account</a>";
 				print "</td>";
 				print "</tr>";
 			}
