@@ -5,7 +5,7 @@ USE beamdb;
 CREATE TABLE user(
 	username VARCHAR(20) NOT NULL,
 	avatar_url VARCHAR(200) DEFAULT NULL,
-	timestamp TIME NOT NULL,
+	timestamp DATETIME NOT NULL,
 
 	PRIMARY KEY(username)
 );
@@ -23,6 +23,8 @@ CREATE TABLE privatemessage(
 	message_id INT AUTO_INCREMENT,
   sender VARCHAR(20),
   receiver VARCHAR(20),
+  message VARCHAR(200),
+  timestamp DATETIME,
 
   PRIMARY KEY(message_id),
   FOREIGN KEY(sender) REFERENCES user(username),
@@ -69,7 +71,7 @@ CREATE TABLE topic(
 	game_id INT,
 	username VARCHAR(20),
 	topic_name VARCHAR(20),
-	timestamp DATE,
+	timestamp DATETIME,
 
 	PRIMARY KEY(topic_id),
 	FOREIGN KEY(game_id) REFERENCES game(game_id),
@@ -80,7 +82,7 @@ CREATE TABLE post(
 	topic_id INT,
 	username VARCHAR(20),
 	message VARCHAR(200),
-	timestamp DATE,
+	timestamp DATETIME,
 
 	PRIMARY KEY(topic_id),
 	FOREIGN KEY(username) REFERENCES user(username)
