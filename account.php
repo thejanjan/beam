@@ -28,7 +28,8 @@ $clean_username = mysqli_real_escape_string($conn, $username);
 
 // Perform an avatar URL post query if we have one set in POST.
 if ($_POST['avatar'] != "") {
-	$avatar_query = "UPDATE user SET avatar_url = '".$_POST['avatar']."' WHERE username='".$clean_username."';";
+	$avatar = mysqli_real_escape_string($conn, $_POST['avatar']);
+	$avatar_query = "UPDATE user SET avatar_url = '$avatar' WHERE username='$clean_username';";
 	mysqli_query($conn, $avatar_query);
 
 	print "<h2>Account Update</h2>Your profile picture has been set successfully!<hr>";
@@ -38,6 +39,7 @@ if ($_POST['avatar'] != "") {
 if ($_POST['add_friend'] != "") {
 	// No sending friend requests to ourselves.
 	$friendname = $_POST['add_friend'];
+	$friendname = mysqli_real_escape_string($conn, $friendname);
 	if ($friendname == $username) {
 		print "<h2>Account Update</h2>You cannot befriend yourself!<br><b>(DO NOT VIOLATE BEAM POLICY.)</b><hr>";
 	} else {
@@ -80,18 +82,18 @@ if ($_POST['add_friend'] != "") {
 // Perform a block send query if we have one set in POST.
 if ($_POST['add_block'] != "") {
 	// No sending blocks to ourselves.
-	if ($_POST['add_block'] == $username) {
+	$block_name = mysqli_real_escape_string($conn, $_POST['add_block']);
+	if ($block_name == $username) {
 		print "<h2>Account Update</h2>You cannot block yourself!<br><b>(DO NOT VIOLATE BEAM POLICY.)</b><hr>";
 	} else {
 		// First, ensure that user even exists.
-		$user_exists_query = "SELECT username, avatar_url, timestamp FROM user WHERE username='".$_POST['add_block']."';";
+		$user_exists_query = "SELECT username, avatar_url, timestamp FROM user WHERE username='$block_name';";
 		$user_exists_result = mysqli_query($conn, $user_exists_query);
 		if (mysqli_num_rows($user_exists_result) == 0) {
 			// No user exists.
 			print "<h2>Account Update</h2>That user does not exist!<hr>";
 		} else {
 			// Now, block them.
-			$block_name = $_POST['add_block'];
 			$rof_query = "DELETE FROM friendstatus WHERE (user_a='$clean_username' AND user_b='$block_name') OR (user_b='$clean_username' AND user_a='$block_name');";
 			mysqli_query($conn, $rof_query);
 

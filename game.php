@@ -35,6 +35,10 @@ if ($row_count == 0) {
 		$review = $_POST['review'];
 		$rating = $_POST['rating'];
 
+		$username = mysqli_real_escape_string($conn, $username);
+		$review = mysqli_real_escape_string($conn, $review);
+		$rating = mysqli_real_escape_string($conn, $rating);
+
 		// First, ensure that user even exists.
 		$user_exists_query = "SELECT username, avatar_url, timestamp FROM user WHERE username='$username';";
 		$user_exists_result = mysqli_query($conn, $user_exists_query);
@@ -52,6 +56,9 @@ if ($row_count == 0) {
 		$username = $_POST['rusername'];
 		$review_id = $_GET['r'];
 		$rating = $_POST['rating'];
+
+		$username = mysqli_real_escape_string($conn, $username);
+		$rating = mysqli_real_escape_string($conn, $rating);
 
 		// First, ensure that user even exists.
 		$user_exists_query = "SELECT username, avatar_url, timestamp FROM user WHERE username='$username';";

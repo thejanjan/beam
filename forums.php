@@ -82,6 +82,9 @@ if ($game_id == "") {
 			$username = $_POST['username'];
 			$topic = $_POST['topic'];
 
+			$username = mysqli_real_escape_string($conn, $username);
+			$topic = mysqli_real_escape_string($conn, $topic);
+
 			// First, ensure that user even exists.
 			$user_exists_query = "SELECT username, avatar_url, timestamp FROM user WHERE username='$username';";
 			$user_exists_result = mysqli_query($conn, $user_exists_query);
@@ -152,6 +155,9 @@ if ($game_id == "") {
 			// Get post constants.
 			$username = $_POST['username'];
 			$post = $_POST['post'];
+
+			$username = mysqli_real_escape_string($conn, $username);
+			$post = mysqli_real_escape_string($conn, $post);
 
 			// First, ensure that user even exists.
 			$user_exists_query = "SELECT username, avatar_url, timestamp FROM user WHERE username='$username';";

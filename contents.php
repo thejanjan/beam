@@ -168,7 +168,7 @@ print "</tbody></table>";
 mysqli_free_result($result);
 
 // Post Table
-print "<hr><h2>topic</h2>";
+print "<hr><h2>post</h2>";
 $query = "SELECT post_id, topic_id, username, message, timestamp FROM post;";
 $result = mysqli_query($conn, $query);
 print "<table border='1' cellpadding = '5' cellspacing = '5'><tbody>";

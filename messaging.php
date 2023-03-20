@@ -23,6 +23,7 @@ $user_b = htmlspecialchars($_GET['b']);
 
 if ($_POST['username'] != "") {
 	$user_a = $_POST['username'];
+	$user_a = mysqli_real_escape_string($conn, $user_a);
 }
 
 // case 1: no users at all
@@ -124,6 +125,7 @@ else {
 			if ($_POST['message'] != "") {
 				// Send a message to user B here.
 				$msg = $_POST['message'];
+				$msg = mysqli_real_escape_string($conn, $msg);
 				$write_query = "INSERT INTO privatemessage (sender, receiver, message, timestamp) VALUES ('$user_a', '$user_b', '$msg', CURRENT_TIMESTAMP);";
 				mysqli_query($conn, $write_query);
 			}
