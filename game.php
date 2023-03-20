@@ -41,7 +41,7 @@ if ($row_count == 0) {
 		$user_exists_result = mysqli_query($conn, $user_exists_query);
 		if (mysqli_num_rows($user_exists_result) != 0) {
 			// Add the review.
-			$write_query = "INSERT INTO review (game_id, username, rating, description) VALUES ('$game_id', '$username', '$rating', '$review');";
+			$write_query = "INSERT INTO review (game_id, username, rating, description, timestamp) VALUES ('$game_id', '$username', '$rating', '$review', CURRENT_TIMESTAMP);";
 			mysqli_query($conn, $write_query);
 		}
 		mysqli_free_result($user_exists_result);
@@ -71,7 +71,7 @@ if ($row_count == 0) {
 	print "</form>";
 
 	// List all reviews
-	$review_query = "SELECT game_id, username, rating, description FROM review WHERE game_id=$game_id;";
+	$review_query = "SELECT game_id, username, rating, description, timestamp FROM review WHERE game_id=$game_id ORDER BY timestamp DESC;";
 	$review_result = mysqli_query($conn, $review_query)
 	or die(mysqli_error($conn));
 
@@ -91,7 +91,7 @@ if ($row_count == 0) {
 				$user_row = mysqli_fetch_array($user_result, MYSQLI_BOTH);
 				$index = $index + 1;
 				print "<hr>";
-				print "<img src=$user_row[avatar_url] alt='Gaming' width='150' height='150' style='float:right'>";
+				print "<img src=$user_row[avatar_url] alt='Gaming' width='100' height='100' style='float:right'>";
 				print "<h2>Review from $username</h2>";
 				print "<h3>A Solid $rating/100</h3>";
 				print "$description";

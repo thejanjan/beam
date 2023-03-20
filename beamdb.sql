@@ -51,6 +51,7 @@ CREATE TABLE review(
 	username VARCHAR(20),
 	rating INT,
 	description VARCHAR(2000),
+	timestamp DATETIME,
 
 	PRIMARY KEY(review_id),
 	FOREIGN KEY(game_id) REFERENCES game(game_id),
