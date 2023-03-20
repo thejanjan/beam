@@ -50,11 +50,12 @@ if ($game_id == "") {
 
 } else {
 	// We are looking at a game.
+	/*
 	$game_query = "SELECT game_id, name, description, image FROM game WHERE game_id='$game_id';";
 	$game_result = mysqli_query($conn, $game_query);
 	$row_count = mysqli_num_rows($game_result);
 	if ($row_count == 0) {
-		//die();
+		die();
 	}
 	$row = mysqli_fetch_array($game_result, MYSQLI_BOTH)
 	mysqli_free_result($game_result);
@@ -62,6 +63,7 @@ if ($game_id == "") {
 	$game_name = $row[name];
 	$game_desc = $row[description];
 	$game_img = $row[image];
+	*/
 	
 	// Any specific topic?
 	$topic_id = $_GET['t'];
