@@ -29,7 +29,15 @@ if ($row_count == 0) {
 } else {
 	$row = mysqli_fetch_array($game_result, MYSQLI_BOTH);
 
-	print "<h1>$row[name]</h1><hr>";
+	print "<h1>$row[name]</h1><h3>$"."$row[cost]</h3><hr>";
+	print "<img src=$row[image] alt='Gaming' width='450' height='450' style='float:right'>";
+	print "$row[description]";
+	print "<br>";
+	print "<br>Release Date: $row[releasedate]";
+	print "<br>Publisher: $row[publisher]";
+	print "<br>Developer: $row[developer]";
+	print "<br>Website: <a>$row[website]</a>";
+	
 }
 
 // cleanup
