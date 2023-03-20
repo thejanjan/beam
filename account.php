@@ -125,7 +125,12 @@ if ($row_count == 0) {
 
 	mysqli_free_result($friend_request_result);
 
-	
+	// Send Friend Request Prompt
+	print "<br><br>You can type a username here to send a friend request to them.<br>";
+	print '<form action="account.php?a='.$username.'" method="POST">';
+	print '<input type="text" name="add_friend">';
+	print '<input type="submit" value="Send Friend Request">';
+	print '</form>';
 }
 
 mysqli_free_result($read_result);
