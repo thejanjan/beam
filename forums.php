@@ -107,7 +107,7 @@ if ($game_id == "") {
 
 		// And now the topic list.
 		
-		$topic_query = "SELECT topic_id, game_id, username, topic_name, timestamp FROM topic WHERE game_id=$game_id;";
+		$topic_query = "SELECT topic_id, game_id, username, topic_name, timestamp FROM topic WHERE game_id=$game_id ORDER BY timestamp DESC;";
 		$topic_result = mysqli_query($conn, $topic_query)
 		or die(mysqli_error($conn));
 		$row_count = mysqli_num_rows($topic_result);
