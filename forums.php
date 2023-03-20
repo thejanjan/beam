@@ -119,7 +119,7 @@ if ($game_id == "") {
 				$user_row = mysqli_fetch_array($user_result, MYSQLI_BOTH);
 				print "<hr>";
 				print "<img src=$user_row[avatar_url] alt='Gaming' width='100' height='100' style='float:left'>";
-				print "<h2><a title='Topic' href='forums.php?g=$gid&t=$row[topic_id]'>$row[topic_name]</a></h2>";
+				print "<h2><a title='Topic' href='forums.php?g=$game_id&t=$row[topic_id]'>$row[topic_name]</a></h2>";
 				print "by $row[username] - $row[timestamp]";
 				print "<br><br><br>";
 			}
