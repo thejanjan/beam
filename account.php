@@ -91,13 +91,8 @@ if ($_GET['b'] != "") {
 			break;
 		case 3:
 			// Remove Outgoing Friend Request
-			print "make query";
 			$rof_query = "DELETE FROM friendstatus WHERE user_a='$clean_username' AND user_b='$_GET[b]';";
-			print "get result";
-			$rof_result = mysqli_query($conn, $rof_query);
-			print "free result";
-			mysqli_free_result($rof_result);
-
+			mysqli_query($conn, $rof_query);
 			print "<h2>Account Update</h2>Removed outgoing friend request.<hr>";
 			break;
 	}
