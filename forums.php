@@ -130,6 +130,74 @@ if ($game_id == "") {
 		
 	} else {
 		// List all posts from this topic.
+		$topic_query = "SELECT topic_id, username, topic_name, timestamp FROM topic WHERE topic_id='topic_id';";
+		$topic_result = mysqli_query($conn, $topic_query);
+		$row_count = mysqli_num_rows($topic_result);
+		if ($row_count == 0) {
+			die();
+		}
+	
+		$row = mysqli_fetch_array($topic_result, MYSQLI_BOTH);
+	
+		$op_name = $row[1];
+		$topic_name = $row[2];
+		$topic_timestamp = $row[3];
+
+		mysqli_free_result($topic_result);
+
+		// Start with the header.
+		print "<h1>$topic_name - by $op_name</h1><hr>";
+
+		// Check POST request for adding a post
+		if ($_POST['username'] != "") {
+			// Get post constants.
+			$username = $_POST['username'];
+			$post = $_POST['post'];
+
+			// First, ensure that user even exists.
+			$user_exists_query = "SELECT username, avatar_url, timestamp FROM user WHERE username='$username';";
+			$user_exists_result = mysqli_query($conn, $user_exists_query);
+			if (mysqli_num_rows($user_exists_result) != 0) {
+				// Add the post.
+				$write_query = "INSERT INTO post (topic_id, username, message, timestamp) VALUES ('$topic_id', '$username', '$post', CURRENT_TIMESTAMP);";
+				mysqli_query($conn, $write_query);
+			}
+			mysqli_free_result($user_exists_result);
+		}
+
+		// Leave a Review entry
+		print "<h3>Add a Post</h3>";
+		print "Add a Post into this Topic.<br>";
+		print "<form action='forums.php?g=$game_id&t=$topic_id' method='POST'>";
+		print "<label for='username'>Username: </label>";
+		print "<input type='text' id='username' name='username'><br>";
+		print "<label for='topic'>Topic Name: </label>";
+		print "<input type='text' id='topic' name='topic'><br>";
+		print "<input type='submit' value='Post'>";
+		print "</form>";
+
+		// And now the topic list.
+		
+		$post_query = "SELECT topic_id, username, message, timestamp FROM topic WHERE topic_id=$topic_id ORDER BY timestamp DESC;";
+		$post_result = mysqli_query($conn, $post_query)
+		or die(mysqli_error($conn));
+		$row_count = mysqli_num_rows($post_result);
+
+		while ($row = mysqli_fetch_array($post_result, MYSQLI_BOTH)) {
+			$user_query = "SELECT username, avatar_url, timestamp FROM user WHERE username='$row[username]';";
+			$user_result = mysqli_query($conn, $user_query);
+			if (mysqli_num_rows($user_result) != 0) {
+				$user_row = mysqli_fetch_array($user_result, MYSQLI_BOTH);
+				print "<hr>";
+				print "<img src=$user_row[avatar_url] alt='Gaming' width='100' height='100' style='float:left'>";
+				print "<h2>$row[username] - $row[timestamp]</h2>";
+				print "$row[message]";
+				print "<br><br><br>";
+			}
+		}
+ 
+		// cleanup
+		mysqli_free_result($topic_result);
 	}
 	
 }

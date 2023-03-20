@@ -80,12 +80,14 @@ CREATE TABLE topic(
 );
 
 CREATE TABLE post(
+	post_id INT,
 	topic_id INT,
 	username VARCHAR(20),
 	message VARCHAR(200),
 	timestamp DATETIME,
 
-	PRIMARY KEY(topic_id),
+	PRIMARY KEY(post_id),
+	FOREIGN KEY(topic_id) REFERENCES topic(topic_id),
 	FOREIGN KEY(username) REFERENCES user(username)
 );
 
