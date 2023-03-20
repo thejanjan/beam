@@ -46,7 +46,7 @@ if (strlen($username) > 20) {
 		print "The username '".$username."' has been registered. Excellent!<br>";
 		print "Please head back to use your brand new account.";
 
-		mysqli_free_result($write_result);
+		// mysqli_free_result($write_result);
 	}
 
 	mysqli_free_result($read_result);
