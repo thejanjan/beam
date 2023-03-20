@@ -150,7 +150,7 @@ else {
 					print "1";
 					$avatar = $row_a[1];
 					print "2";
-					if ($row[sender] == $row_b[0]) {
+					if ($row[1] == $row_b[0]) {
 						print "3";
 						$avatar = $row_b[1];
 					}
