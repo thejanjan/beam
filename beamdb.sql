@@ -61,7 +61,7 @@ CREATE TABLE review(
 CREATE TABLE reviewrating(
 	review_id INT,
 	rater_name VARCHAR(20),
-	rating ENUM("funny", "true", "tragic"),
+	rating VARCHAR(20),
 
 	FOREIGN KEY(review_id) REFERENCES review(review_id),
 	FOREIGN KEY(rater_name) REFERENCES user(username)
