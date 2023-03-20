@@ -71,16 +71,16 @@ if ($row_count == 0) {
 	print "</form>";
 
 	// List all reviews
-	$game_query = "SELECT game_id, username, rating, description FROM review WHERE game_id=$game_id;";
-	$game_result = mysqli_query($conn, $game_query)
+	$review_query = "SELECT game_id, username, rating, description FROM review WHERE game_id=$game_id;";
+	$review_result = mysqli_query($conn, $review_query)
 	or die(mysqli_error($conn));
 
-	$row_count = mysqli_num_rows($game_result);
+	$row_count = mysqli_num_rows($review_result);
 	
 	if ($row_count != 0) {
 		print "<hr><h2>All Reviews ($row_count)</h2>";
 		$index = 0;
-		while ($row = mysqli_fetch_array($game_result, MYSQLI_BOTH)) {
+		while ($row = mysqli_fetch_array($review_result, MYSQLI_BOTH)) {
 			$username = $row[1];
 			$rating = $row[2];
 			$description = $row[3];
@@ -92,16 +92,15 @@ if ($row_count == 0) {
 				$index = $index + 1;
 				print "<hr>";
 				print "<img src=$user_row[avatar_url] alt='Gaming' width='150' height='150' style='float:right'>";
-				print "<h3>Review from $username</h3>";
-				print "<h2>A Solid $rating/100</h2>";
+				print "<h2>Review from $username</h2>";
+				print "<h3>A Solid $rating/100</h3>";
 				print "$description";
 			}
 			mysqli_free_result($user_result);
 		}
-
 	}
 
-	mysqli_free_result($friend_result);
+	mysqli_free_result($review_result);
 }
 
 // cleanup
