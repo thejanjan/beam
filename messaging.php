@@ -66,7 +66,7 @@ else if (($user_a != "") XOR ($user_b != "")) {
 			$index = 0;
 			while ($row = mysqli_fetch_array($friend_result, MYSQLI_BOTH)) {
 				$other_user = $row[0];
-				if ($row[0] == $username) {
+				if ($row[0] == $user) {
 					$other_user = $row[1];
 				}
 
@@ -79,7 +79,7 @@ else if (($user_a != "") XOR ($user_b != "")) {
 					print "<td><p><img alt='Cool Avatar' width='100' height='100' src='$user_row[avatar_url]'></p></td>";
 					print "<td>$other_user</td>";
 					print "<td>";
-					print "<a title='Message' href='messaging.php?a=".$username."&b=$other_user'>Start Messaging</a>";
+					print "<a title='Message' href='messaging.php?a=".$user."&b=$other_user'>Start Messaging</a>";
 					print "<br><a title='Account' href='account.php?a=$other_user'>Visit Account</a>";
 					print "</td>";
 					print "</tr>";
