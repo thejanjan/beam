@@ -120,7 +120,8 @@ else {
 		} else {
 			if ($_POST['message'] != "") {
 				// Send a message to user B here.
-				$write_query = "INSERT INTO privatemessage (sender, receiver, message, timestamp) VALUES ('$user_a', '$user_b', ".$_POST['message'].", CURRENT_TIMESTAMP);";
+				$msg = $_POST['message'];
+				$write_query = "INSERT INTO privatemessage (sender, receiver, message, timestamp) VALUES ('$user_a', '$user_b', '$msg', CURRENT_TIMESTAMP);";
 				mysqli_query($conn, $write_query);
 			}
 
