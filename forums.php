@@ -67,7 +67,6 @@ if ($game_id == "") {
 	$topic_id = $_GET['t'];
 
 	if ($topic_id == "") {
-		/*
 		// No specific topic. List all visible topics.
 		// Start with the header.
 		print "<h1>$game_name - Topics</h1><hr>";
@@ -106,7 +105,6 @@ if ($game_id == "") {
  
 		// cleanup
 		mysqli_free_result($topic_result);
-		*/
 		
 	} else {
 		// List all posts from this topic.
