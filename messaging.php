@@ -125,7 +125,7 @@ else {
 
 			print "You are now Insta-Messaging $user_b!<br>";
 			print "<br>Enter a message below to send it to them.";
-			print '<form action="messaging.php?a=$user_a&b=$user_b" method="POST">';
+			print '<form action="messaging.php?a='.$user_a.'&b='.$user_b.'" method="POST">';
 			print '<input type="text" name="message">';
 			print '<input type="submit" value="Send">';
 			print '</form>';
