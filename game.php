@@ -16,7 +16,7 @@ or die('Error connecting to MySQL server.');
 	<body bgcolor="white">
   
   <?php
-
+  ini_set('display_errors', 1); ini_set('display_startup_errors', 1); error_reporting(E_ALL);
 
 $game_id = $_GET['g'];
 $game_query = "SELECT game_id, name, description, releasedate, cost, publisher, developer, website, image FROM game WHERE game_id='$game_id';";
