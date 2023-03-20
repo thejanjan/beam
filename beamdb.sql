@@ -80,7 +80,7 @@ CREATE TABLE topic(
 );
 
 CREATE TABLE post(
-	post_id INT,
+	post_id INT AUTO_INCREMENT,
 	topic_id INT,
 	username VARCHAR(20),
 	message VARCHAR(200),
