@@ -142,10 +142,14 @@ else {
 
 				$index = 0;
 				while ($row = mysqli_fetch_array($friend_result, MYSQLI_BOTH)) {
-					$avatar = $user_a_query[avatar_url];
-					if ($row[sender] == $user_b_query[username]) {
-						$avatar = $user_b_query[avatar_url];
+					print "1";
+					$avatar = $user_a_query['avatar_url'];
+					print "2";
+					if ($row[sender] == $user_b_query['username']) {
+						print "3";
+						$avatar = $user_b_query['avatar_url'];
 					}
+					print "4";
 					$index = $index + 1;
 					print "<tr>";
 					print "<td><p><img alt='Cool Avatar' width='100' height='100' src='$avatar'></p></td>";
