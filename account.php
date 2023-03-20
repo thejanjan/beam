@@ -78,6 +78,34 @@ if ($_POST['add_friend'] != "") {
 	}
 }
 
+// Perform a block send query if we have one set in POST.
+if ($_POST['add_block'] != "") {
+	// No sending blocks to ourselves.
+	if ($_POST['add_block'] == $username) {
+		print "<h2>Account Update</h2>You cannot block yourself!<br><b>(DO NOT VIOLATE BEAM POLICY.)</b><hr>";
+	} else {
+		// First, ensure that user even exists.
+		$user_exists_query = "SELECT username, avatar_url, timestamp FROM user WHERE username='".$_POST['add_block']."';";
+		$user_exists_result = mysqli_query($conn, $user_exists_query);
+		if (mysqli_num_rows($user_exists_result) == 0) {
+			// No user exists.
+			print "<h2>Account Update</h2>That user does not exist!<hr>";
+		} else {
+			// Now, block them.
+			$rof_query = "DELETE FROM friendstatus WHERE (user_a='$clean_username' AND user_b='$_POST[add_block]') OR (user_b='$clean_username' AND user_a='$_POST[add_block]');";
+			mysqli_query($conn, $rof_query);
+
+			$write_query = "INSERT INTO friendstatus VALUES ('".$clean_username."', '".$_POST['add_block']."', 'block');";
+			$write_result = mysqli_query($conn, $write_query);
+			mysqli_free_result($write_result);
+
+			print "<h2>Account Update</h2>User blocked.<hr>";
+		}
+		mysqli_free_result($user_exists_result);
+	}
+}
+
+
 // If there is a B user in our GET, then we have to perform some action.
 if ($_GET['b'] != "") {
 	$action = $_GET['m'];
@@ -284,7 +312,7 @@ if ($row_count == 0) {
 	$row_count = mysqli_num_rows($block_result);
 
 	print "<h3>Blocks</h3>";
-	print "You currently have <b>$row_count Beamers blocked.</b><br>";
+	print "You currently have <b>$row_count users blocked.</b><br>";
 	
 	if ($row_count != 0) {
 		print "<table border='1' cellpadding = '5' cellspacing = '5'><tbody>";
@@ -318,6 +346,13 @@ if ($row_count == 0) {
 	}
 
 	mysqli_free_result($block_result);
+
+	// Send Block Prompt
+	print "<br><br>You can type a username here to block them.<br>";
+	print '<form action="account.php?a='.$username.'" method="POST">';
+	print '<input type="text" name="add_block">';
+	print '<input type="submit" value="Block User">';
+	print '</form>';
 }
 
 mysqli_free_result($read_result);
