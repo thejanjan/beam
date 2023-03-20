@@ -41,7 +41,7 @@ if ($_POST['add_friend'] != "") {
 		print "<h2>Account Update</h2>You cannot befriend yourself!<br><b>(DO NOT VIOLATE BEAM POLICY.)</b><hr>";
 	} else {
 		// First, ensure there is not one sent already.
-		$af_check_relation_query = "SELECT user_a, user_b, status FROM friendstatus WHERE (user_a='".$clean_username."' AND user_b='".$_POST['add_friend']".') OR (user_a='".$_POST['add_friend']."' AND user_b='".$clean_username."');";
+		$af_check_relation_query = "SELECT user_a, user_b, status FROM friendstatus WHERE (user_a='".$clean_username."' AND user_b='".$_POST['add_friend']."') OR (user_a='".$_POST['add_friend']."' AND user_b='".$clean_username."');";
 		$af_check_relation_result = mysqli_query($conn, $af_check_relation_query);
 		if (mysqli_num_rows($af_check_relation_result) != 0) {
 			// Relation exists, check relation and give relevant error message
