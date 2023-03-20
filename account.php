@@ -159,7 +159,9 @@ if ($row_count == 0) {
 		while ($row = mysqli_fetch_array($friend_result, MYSQLI_BOTH)) {
 			print "tracking down other user";
 			$other_user = $row[user_a];
+			print "is it this one?";
 			if ($row[user_a] == $username) {
+				print "lets try this one";
 				$other_user = $row[user_b];
 			}
 			print "yay! its $other_user";
